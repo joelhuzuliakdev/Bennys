@@ -4,62 +4,72 @@ import { products, categories } from "../data/products";
 console.log("Productos cargados en Astro:", products?.length);
 ---
 
-<Layout title="Fast Food - Delivery">
-  <main class="min-h-screen bg-gradient-to-b from-zinc-950 via-zinc-900 to-zinc-950">
+<Layout title="Benny´s">
+  <main class="min-h-screen bg-[url('/fondo.jpg')] bg-cover bg-center bg-no-repeat">
     <section class="container mx-auto px-4 py-8">
       <!-- HEADER / NAV CON LOGO + BOTÓN CARRITO -->
       <section
-  class="fixed top-0 left-0 w-full z-50 bg-zinc-950/95 backdrop-blur border-b border-zinc-800 px-4 py-4"
->
-  <div class="flex flex-col sm:flex-row items-center sm:items-center justify-between gap-4">
-    <!-- Logo centrado en mobile -->
-    <a href="/" class="flex flex-col sm:flex-row items-center gap-3 hover:opacity-80 transition">
-      <!-- Tu logo aquí -->
-      <img 
-        src="logo_bennys.png" 
-        alt="Benny's Logo" 
-        class="h-18 w-auto object-contain"
-      />
-    </a>
-
-    <!-- Carrito abajo en mobile, a la derecha en desktop -->
-    <button
-      id="btn-open-cart"
-      class="inline-flex items-center gap-2 rounded-full border border-red-600 bg-zinc-900 px-4 py-2 text-sm font-medium text-red-400 hover:bg-red-600 hover:text-white transition shadow-md shadow-red-500/30"
-      type="button"
-      aria-label="Abrir carrito de compras"
-    >
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-        ></path>
-      </svg>
-      <span>Carrito</span>
-      <span
-        id="cart-count"
-        class="text-xs bg-red-600 text-white rounded-full px-2 py-[2px] font-bold min-w-[20px] text-center"
+        class="fixed top-0 left-0 w-full z-50 bg-zinc-950/95 backdrop-blur border-b border-zinc-800 px-4 py-4"
       >
-        0
-      </span>
-    </button>
-  </div>
-</section>
+        <div class="flex flex-col sm:flex-row items-center sm:items-center justify-between gap-4">
+          <!-- Logo centrado en mobile -->
+          <a href="/" class="flex flex-col sm:flex-row items-center gap-3 hover:opacity-80 transition">
+            <!-- Tu logo aquí -->
+            <img 
+              src="logo_bennys.png" 
+              alt="Benny's Logo" 
+              class="h-18 w-auto object-contain"
+            />
+          </a>
+
+          <!-- Carrito abajo en mobile, a la derecha en desktop -->
+          <button
+            id="btn-open-cart"
+            class="inline-flex items-center gap-2 rounded-full border border-red-600 bg-zinc-900 px-4 py-2 text-sm font-medium text-red-400 hover:bg-red-600 hover:text-white transition shadow-md shadow-red-500/30"
+            type="button"
+            aria-label="Abrir carrito de compras"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+              ></path>
+            </svg>
+            <span>Carrito</span>
+            <span
+              id="cart-count"
+              class="text-xs bg-red-600 text-white rounded-full px-2 py-[2px] font-bold min-w-[20px] text-center"
+            >
+              0
+            </span>
+          </button>
+        </div>
+      </section>
 
       <!-- BANNER DE INFORMACIÓN IMPORTANTE -->
       <section class="pt-[140px] sm:pt-[110px] pb-6 px-4">
         <div class="container mx-auto">
+
           <!-- Estado de negocio y horarios -->
           <div
             id="status-banner"
-            class="bg-gradient-to-r from-green-600/20 to-green-500/10 border border-green-500/30 rounded-2xl p-4 mb-4 flex flex-col sm:flex-row items-start sm:items-center gap-3"
+            class="bg-black border border-green-500 rounded-2xl p-4 mb-4 flex flex-col sm:flex-row items-start sm:items-center gap-3"
           >
             <div class="flex items-center gap-2">
-              <div id="status-indicator" class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-              <span id="status-text" class="text-green-400 font-semibold text-sm">Abierto ahora</span>
+              <div
+                id="status-indicator"
+                class="w-3 h-3 bg-green-400 rounded-full animate-pulse"
+              ></div>
+              <span
+                id="status-text"
+                class="text-green-400 font-semibold text-sm"
+              >
+                Abierto ahora
+              </span>
             </div>
+
             <div class="flex flex-wrap gap-3 text-xs text-zinc-300">
               <span>🕐 Lun-Dom: 19:00 - 00:00</span>
               <span id="delivery-time">⏱️ Entrega en 35-45 min</span>
@@ -68,10 +78,18 @@ console.log("Productos cargados en Astro:", products?.length);
 
           <!-- Info de zona y métodos de pago -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+
             <!-- Zona de entrega -->
-            <div class="bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
-              <h3 class="text-sm font-semibold text-zinc-50 mb-2 flex items-center gap-2">
-                <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-4">
+              <h3
+                class="text-sm font-semibold text-zinc-50 mb-2 flex items-center gap-2"
+              >
+                <svg
+                  class="w-4 h-4 text-red-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -87,32 +105,51 @@ console.log("Productos cargados en Astro:", products?.length);
                 </svg>
                 Zona de entrega
               </h3>
+
               <p class="text-xs text-zinc-400 mb-2">Pilar</p>
+
               <div class="flex items-center gap-2 text-xs">
-                <span class="bg-zinc-800 px-2 py-1 rounded text-zinc-300">Envío: $3.000</span>
+                <span class="bg-zinc-800 px-2 py-1 rounded text-zinc-300">
+                  Envío: $3.000
+                </span>
                 <span class="text-red-400">· Retiro gratis</span>
               </div>
             </div>
 
             <!-- Métodos de pago -->
-            <div class="bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
-              <h3 class="text-sm font-semibold text-zinc-50 mb-2 flex items-center gap-2">
-                <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-4">
+              <h3
+                class="text-sm font-semibold text-zinc-50 mb-2 flex items-center gap-2"
+              >
+                <svg
+                  class="w-4 h-4 text-red-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
                     d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
-                  />
+                />
                 </svg>
                 Métodos de pago
               </h3>
+
               <div class="flex flex-wrap gap-2">
-                <span class="bg-zinc-800 px-3 py-1 rounded-full text-xs text-zinc-300">💵 Efectivo</span>
-                <span class="bg-zinc-800 px-3 py-1 rounded-full text-xs text-zinc-300">💳 Tarjetas</span>
-                <span class="bg-zinc-800 px-3 py-1 rounded-full text-xs text-zinc-300">🟢 Transferencia</span>
+                <span class="bg-zinc-800 px-3 py-1 rounded-full text-xs text-zinc-300">
+                  💵 Efectivo
+                </span>
+                <span class="bg-zinc-800 px-3 py-1 rounded-full text-xs text-zinc-300">
+                  💳 Tarjetas
+                </span>
+                <span class="bg-zinc-800 px-3 py-1 rounded-full text-xs text-zinc-300">
+                  🟢 Transferencia
+                </span>
               </div>
             </div>
+
           </div>
         </div>
       </section>
@@ -136,8 +173,10 @@ console.log("Productos cargados en Astro:", products?.length);
       </section>
 
       <!-- CONTADOR DE PRODUCTOS -->
-      <p class="text-xs text-zinc-400 mb-4 text-center">
-        Mostrando <span id="products-count">{products.length}</span> productos
+      <p class="mb-4 text-center">
+        <span class="inline-block bg-zinc-950/90 text-zinc-100 text-xs px-4 py-2 rounded-full border border-zinc-800">
+          Mostrando <span id="products-count" class="font-semibold text-white">{products.length}</span> productos
+        </span>
       </p>
 
       <!-- GRID DE PRODUCTOS -->
@@ -737,13 +776,13 @@ console.log("Productos cargados en Astro:", products?.length);
         
         if (statusBanner && statusIndicator && statusText) {
           if (isOpen) {
-            statusBanner.className = 'bg-gradient-to-r from-green-600/20 to-green-500/10 border border-green-500/30 rounded-2xl p-4 mb-4 flex flex-col sm:flex-row items-start sm:items-center gap-3';
+            statusBanner.className = 'bg-black border border-green-500 rounded-2xl p-4 mb-4 flex flex-col sm:flex-row items-start sm:items-center gap-3';
             statusIndicator.className = 'w-3 h-3 bg-green-400 rounded-full animate-pulse';
             statusText.className = 'text-green-400 font-semibold text-sm';
             statusText.textContent = 'Abierto ahora';
             if (deliveryTime) deliveryTime.style.display = 'inline';
           } else {
-            statusBanner.className = 'bg-gradient-to-r from-red-600/20 to-red-500/10 border border-red-500/30 rounded-2xl p-4 mb-4 flex flex-col sm:flex-row items-start sm:items-center gap-3';
+            statusBanner.className = 'bg-black border border-red-500 rounded-2xl p-4 mb-4 flex flex-col sm:flex-row items-start sm:items-center gap-3';
             statusIndicator.className = 'w-3 h-3 bg-red-400 rounded-full';
             statusText.className = 'text-red-400 font-semibold text-sm';
             statusText.textContent = 'Cerrado';
