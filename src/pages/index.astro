@@ -9,40 +9,43 @@ console.log("Productos cargados en Astro:", products?.length);
     <section class="container mx-auto px-4 py-8">
       <!-- HEADER / NAV CON LOGO + BOTÓN CARRITO -->
       <section
-  class="fixed top-0 left-0 w-full z-50 bg-zinc-950/95 backdrop-blur border-b border-zinc-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-4 py-4"
+  class="fixed top-0 left-0 w-full z-50 bg-zinc-950/95 backdrop-blur border-b border-zinc-800 px-4 py-4"
 >
-  <a href="/" class="flex items-center gap-3 hover:opacity-80 transition">
-    <!-- Tu logo aquí -->
-    <img 
-      src="/logo_bennys.png" 
-      alt="Benny's Logo" 
-      class="h-18 w-auto object-contain"
-    />
-  </a>
+  <div class="flex flex-col sm:flex-row items-center sm:items-center justify-between gap-4">
+    <!-- Logo centrado en mobile -->
+    <a href="/" class="flex flex-col sm:flex-row items-center gap-3 hover:opacity-80 transition">
+      <!-- Tu logo aquí -->
+      <img 
+        src="logo_bennys.png" 
+        alt="Benny's Logo" 
+        class="h-18 w-auto object-contain"
+      />
+    </a>
 
-  <!-- Carrito centrado en mobile, mismo tamaño -->
-  <button
-    id="btn-open-cart"
-    class="self-center sm:self-auto inline-flex items-center gap-2 rounded-full border border-red-600 bg-zinc-900 px-4 py-2 text-sm font-medium text-red-400 hover:bg-red-600 hover:text-white transition shadow-md shadow-red-500/30"
-    type="button"
-    aria-label="Abrir carrito de compras"
-  >
-    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-      ></path>
-    </svg>
-    <span>Carrito</span>
-    <span
-      id="cart-count"
-      class="text-xs bg-red-600 text-white rounded-full px-2 py-[2px] font-bold min-w-[20px] text-center"
+    <!-- Carrito abajo en mobile, a la derecha en desktop -->
+    <button
+      id="btn-open-cart"
+      class="inline-flex items-center gap-2 rounded-full border border-red-600 bg-zinc-900 px-4 py-2 text-sm font-medium text-red-400 hover:bg-red-600 hover:text-white transition shadow-md shadow-red-500/30"
+      type="button"
+      aria-label="Abrir carrito de compras"
     >
-      0
-    </span>
-  </button>
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+        ></path>
+      </svg>
+      <span>Carrito</span>
+      <span
+        id="cart-count"
+        class="text-xs bg-red-600 text-white rounded-full px-2 py-[2px] font-bold min-w-[20px] text-center"
+      >
+        0
+      </span>
+    </button>
+  </div>
 </section>
 
       <!-- BANNER DE INFORMACIÓN IMPORTANTE -->
