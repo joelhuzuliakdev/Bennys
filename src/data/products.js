@@ -118,7 +118,7 @@ export const products = [
     id: 9,
     name: "Coca Cola",
     category: "bebidas",
-    price: 1700,
+    price: 3000,
     image: "/gaseosas/coca-cola.jpg",
     description: "Bebida refrescante 500ml",
     ingredients: []
@@ -127,7 +127,7 @@ export const products = [
     id: 10,
     name: "Sprite",
     category: "bebidas",
-    price: 1500,
+    price: 3000,
     image: "/gaseosas/sprite.jpg",
     description: "Bebida refrescante 500ml",
     ingredients: []
@@ -136,7 +136,7 @@ export const products = [
     id: 11,
     name: "Pepsi",
     category: "bebidas",
-    price: 1600,
+    price: 3000,
     image: "/gaseosas/pepsi.jpg",
     description: "Bebida refrescante 500ml",
     ingredients: []
@@ -157,7 +157,7 @@ export const products = [
   {
     id: 13,
     name: "Chocotorta",
-    category: "postre",
+    category: "postres",
     price: 8000,
     image: "/postres/chocotorta.png",
     description: "Lomo Vegano",
@@ -166,7 +166,7 @@ export const products = [
   {
     id: 14,
     name: "Postre Borracho",
-    category: "postre",
+    category: "postres",
     price: 8000,
     image: "/postres/postre-borracho.jpg",
     description: "Postre borracho",
@@ -175,7 +175,7 @@ export const products = [
   {
     id: 15,
     name: "Ensalada de Frutas",
-    category: "postre",
+    category: "postres",
     price: 8000,
     image: "/postres/ensalada-de-fruta.jpg",
     description: "Ensalada de frutas",
@@ -187,6 +187,6 @@ export const categories = [
   { id: "todos", name: "Todos" },
   { id: "hamburguesas", name: "Hamburguesas" },
   { id: "vegano", name: "Vegano" },
-  { id: "postre", name: "Postres" },
+  { id: "postres", name: "Postres" },
   { id: "bebidas", name: "Bebidas" }
 ];

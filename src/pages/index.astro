@@ -147,7 +147,7 @@ console.log("Productos cargados en Astro:", products?.length);
             class="product-card bg-zinc-900/90 border border-zinc-800 rounded-2xl overflow-hidden flex flex-col shadow-lg shadow-black/50 hover:-translate-y-1 hover:shadow-2xl hover:border-zinc-700 transition-all duration-300"
             data-category={product.category}
             data-id={product.id}
-            data-price={product.price}
+            data-price={product.price || 0}
             data-name={product.name}
             data-description={product.description}
             style="animation: fadeIn 0.5s ease-out"
@@ -179,7 +179,10 @@ console.log("Productos cargados en Astro:", products?.length);
                   {product.name}
                 </h3>
                 <span class="text-red-500 font-bold text-sm whitespace-nowrap product-price">
-                  ${product.price.toLocaleString("es-AR")}
+                  {product.category === "bebidas" || product.category === "postres" 
+                    ? `$${product.price.toLocaleString("es-AR")}`
+                    : "Desde $10.900"
+                  }
                 </span>
               </div>
 
@@ -188,22 +191,35 @@ console.log("Productos cargados en Astro:", products?.length);
               </p>
 
               <div class="mt-auto flex gap-2">
-                <button
-                  type="button"
-                  class="btn-customize flex-1 rounded-full border border-zinc-600 px-3 py-2 text-[11px] font-medium text-zinc-200 hover:bg-zinc-800 hover:border-zinc-500 transition"
-                  data-product-id={product.id}
-                  aria-label={`Personalizar ${product.name}`}
-                >
-                  Personalizar
-                </button>
-                <button
-                  type="button"
-                  class="btn-add flex-1 rounded-full bg-red-600 px-3 py-2 text-[11px] font-semibold text-white hover:bg-red-700 transition active:scale-95"
-                  data-product-id={product.id}
-                  aria-label={`Agregar ${product.name} al carrito`}
-                >
-                  Agregar
-                </button>
+                {(product.category === "bebidas" || product.category === "postres") ? (
+                  <button
+                    type="button"
+                    class="btn-add w-full rounded-full bg-red-600 px-3 py-2 text-[11px] font-semibold text-white hover:bg-red-700 transition active:scale-95"
+                    data-product-id={product.id}
+                    aria-label={`Agregar ${product.name} al carrito`}
+                  >
+                    Agregar al carrito
+                  </button>
+                ) : (
+                  <>
+                    <button
+                      type="button"
+                      class="btn-customize flex-1 rounded-full border border-zinc-600 px-3 py-2 text-[11px] font-medium text-zinc-200 hover:bg-zinc-800 hover:border-zinc-500 transition"
+                      data-product-id={product.id}
+                      aria-label={`Personalizar ${product.name}`}
+                    >
+                      Personalizar
+                    </button>
+                    <button
+                      type="button"
+                      class="btn-add flex-1 rounded-full bg-red-600 px-3 py-2 text-[11px] font-semibold text-white hover:bg-red-700 transition active:scale-95"
+                      data-product-id={product.id}
+                      aria-label={`Agregar ${product.name} al carrito`}
+                    >
+                      Agregar
+                    </button>
+                  </>
+                )}
               </div>
             </div>
           </article>
@@ -317,6 +333,75 @@ console.log("Productos cargados en Astro:", products?.length);
         <!-- Contenido con scroll -->
         <div class="p-4 sm:p-6 overflow-y-auto flex-1">
           <div id="customize-content">
+            <!-- SELECTOR DE TAMAÑO (CANTIDAD DE CARNE) -->
+            <div class="mb-6">
+              <h3 class="text-sm font-semibold text-zinc-100 mb-2">
+                ¿Cuántas carnes querés? 🍔
+              </h3>
+              <p class="text-xs text-zinc-400 mb-3">
+                Elegí el tamaño de tu hamburguesa:
+              </p>
+              <div class="flex flex-col gap-2">
+                <label
+                  class="size-option flex items-center justify-between bg-zinc-800 rounded-xl px-4 py-3 cursor-pointer hover:bg-zinc-700 transition border-2 border-transparent"
+                >
+                  <div class="flex items-center gap-3">
+                    <input
+                      type="radio"
+                      name="burger-size"
+                      class="size-radio w-5 h-5"
+                      value="simple"
+                      data-price="10900"
+                      checked
+                    />
+                    <div>
+                      <span class="text-sm font-medium text-zinc-100">Simple</span>
+                      <span class="text-xs text-zinc-400 block">1 carne</span>
+                    </div>
+                  </div>
+                  <span class="text-sm font-bold text-red-400">$10.900</span>
+                </label>
+
+                <label
+                  class="size-option flex items-center justify-between bg-zinc-800 rounded-xl px-4 py-3 cursor-pointer hover:bg-zinc-700 transition border-2 border-transparent"
+                >
+                  <div class="flex items-center gap-3">
+                    <input
+                      type="radio"
+                      name="burger-size"
+                      class="size-radio w-5 h-5"
+                      value="doble"
+                      data-price="12900"
+                    />
+                    <div>
+                      <span class="text-sm font-medium text-zinc-100">Doble</span>
+                      <span class="text-xs text-zinc-400 block">2 carnes</span>
+                    </div>
+                  </div>
+                  <span class="text-sm font-bold text-red-400">$12.900</span>
+                </label>
+
+                <label
+                  class="size-option flex items-center justify-between bg-zinc-800 rounded-xl px-4 py-3 cursor-pointer hover:bg-zinc-700 transition border-2 border-transparent"
+                >
+                  <div class="flex items-center gap-3">
+                    <input
+                      type="radio"
+                      name="burger-size"
+                      class="size-radio w-5 h-5"
+                      value="triple"
+                      data-price="14900"
+                    />
+                    <div>
+                      <span class="text-sm font-medium text-zinc-100">Triple</span>
+                      <span class="text-xs text-zinc-400 block">3 carnes</span>
+                    </div>
+                  </div>
+                  <span class="text-sm font-bold text-red-400">$14.900</span>
+                </label>
+              </div>
+            </div>
+
             <!-- Quitar ingredientes -->
             <div class="mb-6">
               <h3 class="text-sm font-semibold text-zinc-100 mb-2">
@@ -446,7 +531,7 @@ console.log("Productos cargados en Astro:", products?.length);
             class="w-full rounded-full bg-red-600 hover:bg-red-700 px-6 py-3 text-sm font-semibold text-white transition active:scale-95"
             type="button"
           >
-            Guardar cambios
+            Agregar al carrito
           </button>
         </div>
       </div>
@@ -465,7 +550,7 @@ console.log("Productos cargados en Astro:", products?.length);
             ¿Querés personalizar tu pedido antes de agregarlo?
           </h2>
           <p class="text-sm text-zinc-300 mb-6">
-            Podés sacar ingredientes (sin lechuga, sin salsas, etc.) o sumar extras como queso,
+            Podés elegir el tamaño (simple, doble o triple), sacar ingredientes (sin lechuga, sin salsas, etc.) o sumar extras como queso,
             bacon o carne extra.
           </p>
           <div class="flex flex-col sm:flex-row justify-end gap-3">
@@ -474,7 +559,7 @@ console.log("Productos cargados en Astro:", products?.length);
               type="button"
               class="px-6 py-3 rounded-full text-sm bg-zinc-800 text-zinc-200 hover:bg-zinc-700 transition font-medium order-2 sm:order-1"
             >
-              Agregar así
+              Agregar Simple
             </button>
             <button
               id="btn-confirm-yes"
@@ -533,10 +618,49 @@ console.log("Productos cargados en Astro:", products?.length);
 
     /* Prevenir zoom en iOS en inputs */
     input[type="checkbox"],
+    input[type="radio"],
     input[type="text"],
     textarea,
     button {
       touch-action: manipulation;
+    }
+
+    /* Estilos para radio buttons personalizados */
+    input[type="radio"].size-radio {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 1.25rem;
+      height: 1.25rem;
+      border: 2px solid #52525b;
+      border-radius: 50%;
+      background-color: #27272a;
+      cursor: pointer;
+      position: relative;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    input[type="radio"].size-radio:checked {
+      background-color: #dc2626;
+      border-color: #dc2626;
+    }
+
+    input[type="radio"].size-radio:checked::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 0.5rem;
+      height: 0.5rem;
+      background-color: #ffffff;
+      border-radius: 50%;
+    }
+
+    /* Highlight del label cuando está seleccionado */
+    .size-option:has(input:checked) {
+      border-color: #dc2626 !important;
+      background-color: #3f1d1d !important;
     }
 
     /* Estilos para checkboxes visibles en móviles */
@@ -665,24 +789,30 @@ console.log("Productos cargados en Astro:", products?.length);
 
       const removeOptions = document.querySelectorAll(".opt-remove");
       const extraOptions = document.querySelectorAll(".opt-extra");
+      const sizeRadios = document.querySelectorAll(".size-radio");
 
       // SERIALIZAR PRODUCTOS DESDE EL DOM
       const productsData = Array.from(document.querySelectorAll(".product-card")).map(
         (card) => {
           const id = card.dataset.id;
           const name = card.querySelector(".product-name")?.textContent?.trim() || "";
-          const price = parseFloat(card.dataset.price || "0");
           const image = card.querySelector(".product-image")?.getAttribute("src") || "";
           const description =
             card.querySelector(".product-description")?.textContent?.trim() || "";
           const category = card.dataset.category || "todos";
-          return { id, name, price, image, description, category };
+          const priceElement = card.querySelector(".product-price");
+          const priceText = priceElement?.textContent?.trim() || "";
+          // Extraer el precio numérico para bebidas y postres
+          const price = priceText.startsWith("$") 
+            ? parseFloat(priceText.replace(/\$|\.|\,/g, "")) 
+            : null;
+          return { id, name, image, description, category, price };
         }
       );
 
       // ============ FUNCIONES DE CARRITO ============
 
-      function addToCart(productId, optionsOrNotes) {
+      function addToCart(productId, options = {}) {
         // Verificar si el negocio está abierto antes de agregar
         if (!checkBusinessStatus()) {
           showNotification("⚠️ Lo sentimos, estamos cerrados. Horario: 19:00 - 00:00");
@@ -695,29 +825,42 @@ console.log("Productos cargados en Astro:", products?.length);
           return;
         }
 
-        let notes = "";
-        let extraAmount = 0;
-
-        if (typeof optionsOrNotes === "string") {
-          notes = optionsOrNotes;
-        } else if (typeof optionsOrNotes === "object" && optionsOrNotes !== null) {
-          notes = optionsOrNotes.notes || "";
-          extraAmount = optionsOrNotes.extraAmount || 0;
+        // Si es bebida o postre, usar precio fijo
+        if (product.category === "bebidas" || product.category === "postres") {
+          cart.push({
+            ...product,
+            price: product.price,
+            quantity: 1,
+            notes: "",
+          });
+          updateCart();
+          showNotification(`Se agregó "${product.name}" al carrito`);
+          return;
         }
 
-        const finalPrice = product.price + extraAmount;
+        // Para hamburguesas, usar el sistema de tamaños
+        const size = options.size || "simple";
+        const basePrice = options.basePrice || 10900;
+        const notes = options.notes || "";
+        const extraAmount = options.extraAmount || 0;
+        const finalPrice = basePrice + extraAmount;
+
+        const sizeName = size === "simple" ? "Simple" : size === "doble" ? "Doble" : "Triple";
+        const fullName = `${product.name} ${sizeName}`;
 
         cart.push({
           ...product,
+          name: fullName,
+          size,
           price: finalPrice,
-          basePrice: product.price,
+          basePrice,
           extraAmount,
           quantity: 1,
           notes,
         });
 
         updateCart();
-        showNotification(`Se agregó "${product.name}" al carrito`);
+        showNotification(`Se agregó "${fullName}" al carrito`);
       }
 
       function removeFromCart(index) {
@@ -750,7 +893,9 @@ console.log("Productos cargados en Astro:", products?.length);
         } else {
           cartItems.innerHTML = cart
             .map(
-              (item, index) => `
+              (item, index) => {
+                const isBeverageOrDessert = item.category === "bebidas" || item.category === "postres";
+                return `
           <div class="flex gap-3 mb-4 pb-4 border-b border-zinc-800 last:border-0">
             <img
               src="${item.image}"
@@ -786,13 +931,15 @@ console.log("Productos cargados en Astro:", products?.length);
                 </button>
 
                 <div class="ml-auto flex flex-col items-end gap-1">
-                  <button
-                    class="btn-edit text-xs text-red-400 hover:text-red-300 transition"
-                    data-index="${index}"
-                    aria-label="Volver a personalizar este producto"
-                  >
-                    Personalizar
-                  </button>
+                  ${!isBeverageOrDessert ? `
+                    <button
+                      class="btn-edit text-xs text-red-400 hover:text-red-300 transition"
+                      data-index="${index}"
+                      aria-label="Volver a personalizar este producto"
+                    >
+                      Personalizar
+                    </button>
+                  ` : ''}
 
                   <button
                     class="btn-remove text-xs text-red-400 hover:text-red-300 transition"
@@ -804,7 +951,8 @@ console.log("Productos cargados en Astro:", products?.length);
                 </div>
               </div>
             </div>
-          </div>`
+          </div>`;
+              }
             )
             .join("");
 
@@ -833,6 +981,11 @@ console.log("Productos cargados en Astro:", products?.length);
 
               editingCartIndex = index;
               currentCustomizingProduct = item.id;
+
+              // Restaurar el tamaño seleccionado
+              sizeRadios.forEach((radio) => {
+                radio.checked = radio.value === item.size;
+              });
 
               removeOptions.forEach((o) => (o.checked = false));
               extraOptions.forEach((o) => (o.checked = false));
@@ -886,6 +1039,9 @@ console.log("Productos cargados en Astro:", products?.length);
         closeModal(customizeModal);
         currentCustomizingProduct = null;
         editingCartIndex = null;
+        sizeRadios.forEach((radio) => {
+          radio.checked = radio.value === "simple";
+        });
         removeOptions.forEach((o) => (o.checked = false));
         extraOptions.forEach((o) => (o.checked = false));
         customNotes.value = "";
@@ -915,7 +1071,17 @@ console.log("Productos cargados en Astro:", products?.length);
             return;
           }
           
-          pendingProductId = btn.dataset.productId;
+          const productId = btn.dataset.productId;
+          const product = productsData.find((p) => p.id === String(productId));
+          
+          // Si es bebida o postre, agregar directamente sin modal
+          if (product && (product.category === "bebidas" || product.category === "postres")) {
+            addToCart(productId);
+            return;
+          }
+          
+          // Para hamburguesas, abrir modal de confirmación
+          pendingProductId = productId;
           editingCartIndex = null;
           openModal(confirmModal);
         });
@@ -926,10 +1092,12 @@ console.log("Productos cargados en Astro:", products?.length);
           e.preventDefault();
           e.stopPropagation();
           
-          // Permitir ver opciones de personalización aunque esté cerrado
           currentCustomizingProduct = btn.dataset.productId;
           pendingProductId = null;
           editingCartIndex = null;
+          sizeRadios.forEach((radio) => {
+            radio.checked = radio.value === "simple";
+          });
           removeOptions.forEach((o) => (o.checked = false));
           extraOptions.forEach((o) => (o.checked = false));
           customNotes.value = "";
@@ -942,7 +1110,13 @@ console.log("Productos cargados en Astro:", products?.length);
           closeModal(confirmModal);
           return;
         }
-        addToCart(pendingProductId);
+        // Agregar hamburguesa simple por defecto
+        addToCart(pendingProductId, {
+          size: "simple",
+          basePrice: 10900,
+          notes: "",
+          extraAmount: 0
+        });
         pendingProductId = null;
         closeModal(confirmModal);
       });
@@ -954,6 +1128,9 @@ console.log("Productos cargados en Astro:", products?.length);
         }
         currentCustomizingProduct = pendingProductId;
         editingCartIndex = null;
+        sizeRadios.forEach((radio) => {
+          radio.checked = radio.value === "simple";
+        });
         removeOptions.forEach((o) => (o.checked = false));
         extraOptions.forEach((o) => (o.checked = false));
         customNotes.value = "";
@@ -964,6 +1141,16 @@ console.log("Productos cargados en Astro:", products?.length);
 
       btnAddCustomized?.addEventListener("click", () => {
         if (!currentCustomizingProduct) return;
+
+        // Obtener el tamaño seleccionado
+        const selectedSize = document.querySelector('input[name="burger-size"]:checked');
+        if (!selectedSize) {
+          showNotification("⚠️ Por favor seleccioná un tamaño");
+          return;
+        }
+
+        const size = selectedSize.value;
+        const basePrice = parseInt(selectedSize.dataset.price);
 
         const notesParts = [];
         let extraAmount = 0;
@@ -996,19 +1183,25 @@ console.log("Productos cargados en Astro:", products?.length);
             console.warn("Ítem de carrito no encontrado al editar:", editingCartIndex);
           } else {
             const item = cart[editingCartIndex];
-            item.basePrice = product.price;
+            const sizeName = size === "simple" ? "Simple" : size === "doble" ? "Doble" : "Triple";
+            item.name = `${product.name.replace(/ (Simple|Doble|Triple)$/, "")} ${sizeName}`;
+            item.size = size;
+            item.basePrice = basePrice;
             item.extraAmount = extraAmount;
-            item.price = product.price + extraAmount;
+            item.price = basePrice + extraAmount;
             item.notes = notes;
             updateCart();
           }
         } else {
-          addToCart(currentCustomizingProduct, { notes, extraAmount });
+          addToCart(currentCustomizingProduct, { size, basePrice, notes, extraAmount });
         }
 
         closeModal(customizeModal);
         currentCustomizingProduct = null;
         editingCartIndex = null;
+        sizeRadios.forEach((radio) => {
+          radio.checked = radio.value === "simple";
+        });
         removeOptions.forEach((o) => (o.checked = false));
         extraOptions.forEach((o) => (o.checked = false));
         customNotes.value = "";
@@ -1106,14 +1299,14 @@ console.log("Productos cargados en Astro:", products?.length);
         let mensaje = "¡Hola! Quiero hacer el siguiente pedido:%0A%0A";
         cart.forEach((item) => {
           const subtotal = item.price * item.quantity;
-          mensaje += `🍔 ${item.quantity}x ${item.name} - ${subtotal.toLocaleString(
+          mensaje += `🍔 ${item.quantity}x ${item.name} - $${subtotal.toLocaleString(
             "es-AR"
           )}%0A`;
           if (item.notes) {
             mensaje += `⚠️ ${item.notes}%0A`;
           }
         });
-        mensaje += `%0A💰 *Total: ${calculateTotal().toLocaleString("es-AR")}*`;
+        mensaje += `%0A💰 *Total: $${calculateTotal().toLocaleString("es-AR")}*`;
 
         const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${mensaje}`;
         window.open(url, "_blank");
