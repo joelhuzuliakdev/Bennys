@@ -6,7 +6,6 @@ console.log("Productos cargados en Astro:", products?.length);
 
 <Layout title="Benny´s">
   <!-- FONDO FIJO CON TAMAÑO CONSTANTE -->
-  <div id="bg-wrapper"></div>
   
   <main class="min-h-screen relative" style="z-index: 1;">
     <section class="container mx-auto px-4 py-8">
@@ -562,25 +561,16 @@ console.log("Productos cargados en Astro:", products?.length);
 
   <!-- Animaciones simples usadas en la UI -->
   <style>
-    /* Asegurar que el html y body permitan que el fondo cubra todo */
-    :global(html),
-    :global(body) {
+    html, body {
       min-height: 100%;
-      position: relative;
     }
-    
-    /* Wrapper para el fondo que cubre todo el scroll */
-    #bg-wrapper {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      min-height: 100%;
+
+    body {
       background-image: url('/fondo.jpg');
       background-size: cover;
       background-position: center;
-      background-repeat: repeat-y;
-      z-index: 0;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
     }
     
     @keyframes fadeIn {
