@@ -165,7 +165,7 @@ console.log("Productos cargados en Astro:", products?.length);
             class={`filter-btn px-6 py-2.5 rounded-full border-2 text-xs uppercase tracking-wider font-bold transition-all duration-300 ${
               cat.id === "todos"
                 ? "active bg-red-600 border-white text-white shadow-lg shadow-red-500/50"
-                : "bg-black/70 border-white text-zinc-200 hover:bg-zinc-700 hover:border-zinc-500"
+                : "bg-black border-white text-zinc-200 hover:bg-zinc-700 hover:border-zinc-500"
             }`}
             aria-label={`Filtrar por ${cat.name}`}
           >
@@ -561,22 +561,29 @@ console.log("Productos cargados en Astro:", products?.length);
 
   <!-- Animaciones simples usadas en la UI -->
   <style>
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
-        url('/fondo.jpg');
-      background-repeat: repeat;
-      background-size: 140px 140px;
-      background-position: top center;
-      z-index: -1;
+
+    html, body {
+      margin: 0;
+      min-height: 100svh;
     }
 
     body {
       position: relative;
-      padding-bottom: 30px;
+      background: transparent;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      min-height: 100svh;
+
+      background-image: url('/fondo.jpg');
+      background-repeat: repeat;
+      background-size: 140px 140px;
+      background-position: top center;
+
+      z-index: -1;
     }
     
     @keyframes fadeIn {
