@@ -561,16 +561,19 @@ console.log("Productos cargados en Astro:", products?.length);
 
   <!-- Animaciones simples usadas en la UI -->
   <style>
-    html, body {
-      min-height: 100%;
-    }
-
-    body {
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
       background-image: url('/fondo.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      background-attachment: fixed;
+      z-index: -1;
+    }
+
+    body {
+      position: relative;
     }
     
     @keyframes fadeIn {
