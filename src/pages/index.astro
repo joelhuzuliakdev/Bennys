@@ -9,48 +9,41 @@ console.log("Productos cargados en Astro:", products?.length);
     <section class="container mx-auto px-4 py-8">
       <!-- HEADER / NAV CON LOGO + BOTÓN CARRITO -->
       <section
-        class="fixed top-0 left-0 w-full z-50 bg-zinc-950/95 backdrop-blur border-b border-zinc-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-4 py-4"
-      >
-        <div class="flex items-center gap-3">
-          <div
-            class="h-12 w-12 rounded-full bg-amber-400 flex items-center justify-center text-zinc-950 text-xl font-black shadow-lg shadow-amber-500/40"
-          >
-            GM
-          </div>
-          <div class="flex flex-col leading-tight">
-            <h1 class="text-2xl font-semibold text-zinc-50">
-              Grill Master
-            </h1>
-            <p class="text-sm text-zinc-400">
-              Hamburguesas, pizzas, lomitos y más 🍔
-            </p>
-          </div>
-        </div>
+  class="fixed top-0 left-0 w-full z-50 bg-zinc-950/95 backdrop-blur border-b border-zinc-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-4 py-4"
+>
+  <a href="/" class="flex items-center gap-3 hover:opacity-80 transition">
+    <!-- Tu logo aquí -->
+    <img 
+      src="/logo_bennys.png" 
+      alt="Benny's Logo" 
+      class="h-18 w-auto object-contain"
+    />
+  </a>
 
-        <!-- Carrito centrado en mobile, mismo tamaño -->
-        <button
-          id="btn-open-cart"
-          class="self-center sm:self-auto inline-flex items-center gap-2 rounded-full border border-amber-400 bg-zinc-900 px-4 py-2 text-sm font-medium text-amber-300 hover:bg-amber-400 hover:text-zinc-950 transition shadow-md shadow-amber-500/30"
-          type="button"
-          aria-label="Abrir carrito de compras"
-        >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-            ></path>
-          </svg>
-          <span>Carrito</span>
-          <span
-            id="cart-count"
-            class="text-xs bg-amber-500 text-zinc-950 rounded-full px-2 py-[2px] font-bold min-w-[20px] text-center"
-          >
-            0
-          </span>
-        </button>
-      </section>
+  <!-- Carrito centrado en mobile, mismo tamaño -->
+  <button
+    id="btn-open-cart"
+    class="self-center sm:self-auto inline-flex items-center gap-2 rounded-full border border-red-600 bg-zinc-900 px-4 py-2 text-sm font-medium text-red-400 hover:bg-red-600 hover:text-white transition shadow-md shadow-red-500/30"
+    type="button"
+    aria-label="Abrir carrito de compras"
+  >
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+      ></path>
+    </svg>
+    <span>Carrito</span>
+    <span
+      id="cart-count"
+      class="text-xs bg-red-600 text-white rounded-full px-2 py-[2px] font-bold min-w-[20px] text-center"
+    >
+      0
+    </span>
+  </button>
+</section>
 
       <!-- BANNER DE INFORMACIÓN IMPORTANTE -->
       <section class="pt-[140px] sm:pt-[110px] pb-6 px-4">
@@ -75,7 +68,7 @@ console.log("Productos cargados en Astro:", products?.length);
             <!-- Zona de entrega -->
             <div class="bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
               <h3 class="text-sm font-semibold text-zinc-50 mb-2 flex items-center gap-2">
-                <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -91,17 +84,17 @@ console.log("Productos cargados en Astro:", products?.length);
                 </svg>
                 Zona de entrega
               </h3>
-              <p class="text-xs text-zinc-400 mb-2">Centro, Nueva Córdoba, Cerro</p>
+              <p class="text-xs text-zinc-400 mb-2">Pilar</p>
               <div class="flex items-center gap-2 text-xs">
-                <span class="bg-zinc-800 px-2 py-1 rounded text-zinc-300">Envío: $1.500</span>
-                <span class="text-amber-400">· Retiro gratis</span>
+                <span class="bg-zinc-800 px-2 py-1 rounded text-zinc-300">Envío: $3.000</span>
+                <span class="text-red-400">· Retiro gratis</span>
               </div>
             </div>
 
             <!-- Métodos de pago -->
             <div class="bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
               <h3 class="text-sm font-semibold text-zinc-50 mb-2 flex items-center gap-2">
-                <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -113,8 +106,8 @@ console.log("Productos cargados en Astro:", products?.length);
               </h3>
               <div class="flex flex-wrap gap-2">
                 <span class="bg-zinc-800 px-3 py-1 rounded-full text-xs text-zinc-300">💵 Efectivo</span>
-                <span class="bg-zinc-800 px-3 py-1 rounded-full text-xs text-zinc-300">💳 Transferencia</span>
-                <span class="bg-zinc-800 px-3 py-1 rounded-full text-xs text-zinc-300">🟢 MercadoPago</span>
+                <span class="bg-zinc-800 px-3 py-1 rounded-full text-xs text-zinc-300">💳 Tarjetas</span>
+                <span class="bg-zinc-800 px-3 py-1 rounded-full text-xs text-zinc-300">🟢 Transferencia</span>
               </div>
             </div>
           </div>
@@ -129,7 +122,7 @@ console.log("Productos cargados en Astro:", products?.length);
             data-filter={cat.id}
             class={`filter-btn px-4 py-2 rounded-full border text-xs uppercase tracking-wide transition ${
               cat.id === "todos"
-                ? "bg-amber-400 border-amber-400 text-zinc-950 font-semibold shadow shadow-amber-500/40"
+                ? "bg-red-600 border-red-600 text-white font-semibold shadow shadow-red-500/40"
                 : "bg-zinc-900 border-zinc-700 text-zinc-300 hover:bg-zinc-800"
             }`}
             aria-label={`Filtrar por ${cat.name}`}
@@ -168,7 +161,7 @@ console.log("Productos cargados en Astro:", products?.length);
                 <span
                   class={`absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-bold shadow-lg ${
                     product.badge === "popular"
-                      ? "bg-amber-400 text-zinc-950"
+                      ? "bg-red-600 text-white"
                       : "bg-green-500 text-white"
                   }`}
                 >
@@ -182,7 +175,7 @@ console.log("Productos cargados en Astro:", products?.length);
                 <h3 class="font-semibold text-zinc-50 text-sm product-name">
                   {product.name}
                 </h3>
-                <span class="text-amber-400 font-bold text-sm whitespace-nowrap product-price">
+                <span class="text-red-400 font-bold text-sm whitespace-nowrap product-price">
                   ${product.price.toLocaleString("es-AR")}
                 </span>
               </div>
@@ -202,7 +195,7 @@ console.log("Productos cargados en Astro:", products?.length);
                 </button>
                 <button
                   type="button"
-                  class="btn-add flex-1 rounded-full bg-amber-400 px-3 py-2 text-[11px] font-semibold text-zinc-950 hover:bg-amber-300 transition active:scale-95"
+                  class="btn-add flex-1 rounded-full bg-red-600 px-3 py-2 text-[11px] font-semibold text-white hover:bg-red-700 transition active:scale-95"
                   data-product-id={product.id}
                   aria-label={`Agregar ${product.name} al carrito`}
                 >
@@ -259,7 +252,7 @@ console.log("Productos cargados en Astro:", products?.length);
         <div class="p-6 border-t border-zinc-800 bg-zinc-950/50">
           <div class="flex items-center justify-between mb-4">
             <span class="text-zinc-400 text-sm">Total:</span>
-            <span id="cart-total" class="text-2xl font-bold text-amber-400">
+            <span id="cart-total" class="text-2xl font-bold text-red-400">
               $0
             </span>
           </div>
@@ -335,7 +328,7 @@ console.log("Productos cargados en Astro:", products?.length);
                 >
                   <input
                     type="checkbox"
-                    class="opt-remove w-4 h-4 rounded border-zinc-600 text-amber-400 focus:ring-amber-400 focus:ring-offset-0"
+                    class="opt-remove w-4 h-4 rounded border-zinc-600 text-red-600 focus:ring-red-600 focus:ring-offset-0"
                     value="sin queso"
                   />
                   <span>Sin queso</span>
@@ -345,7 +338,7 @@ console.log("Productos cargados en Astro:", products?.length);
                 >
                   <input
                     type="checkbox"
-                    class="opt-remove w-4 h-4 rounded border-zinc-600 text-amber-400 focus:ring-amber-400 focus:ring-offset-0"
+                    class="opt-remove w-4 h-4 rounded border-zinc-600 text-red-600 focus:ring-red-600 focus:ring-offset-0"
                     value="sin cebolla"
                   />
                   <span>Sin cebolla</span>
@@ -355,7 +348,7 @@ console.log("Productos cargados en Astro:", products?.length);
                 >
                   <input
                     type="checkbox"
-                    class="opt-remove w-4 h-4 rounded border-zinc-600 text-amber-400 focus:ring-amber-400 focus:ring-offset-0"
+                    class="opt-remove w-4 h-4 rounded border-zinc-600 text-red-600 focus:ring-red-600 focus:ring-offset-0"
                     value="sin lechuga"
                   />
                   <span>Sin lechuga</span>
@@ -365,7 +358,7 @@ console.log("Productos cargados en Astro:", products?.length);
                 >
                   <input
                     type="checkbox"
-                    class="opt-remove w-4 h-4 rounded border-zinc-600 text-amber-400 focus:ring-amber-400 focus:ring-offset-0"
+                    class="opt-remove w-4 h-4 rounded border-zinc-600 text-red-600 focus:ring-red-600 focus:ring-offset-0"
                     value="sin tomate"
                   />
                   <span>Sin tomate</span>
@@ -375,7 +368,7 @@ console.log("Productos cargados en Astro:", products?.length);
                 >
                   <input
                     type="checkbox"
-                    class="opt-remove w-4 h-4 rounded border-zinc-600 text-amber-400 focus:ring-amber-400 focus:ring-offset-0"
+                    class="opt-remove w-4 h-4 rounded border-zinc-600 text-red-600 focus:ring-red-600 focus:ring-offset-0"
                     value="sin aderezos"
                   />
                   <span>Sin aderezos</span>
@@ -397,7 +390,7 @@ console.log("Productos cargados en Astro:", products?.length);
                 >
                   <input
                     type="checkbox"
-                    class="opt-extra w-4 h-4 rounded border-zinc-600 text-amber-400 focus:ring-amber-400 focus:ring-offset-0"
+                    class="opt-extra w-4 h-4 rounded border-zinc-600 text-red-600 focus:ring-red-600 focus:ring-offset-0"
                     data-extra="3000"
                     value="extra queso"
                   />
@@ -408,7 +401,7 @@ console.log("Productos cargados en Astro:", products?.length);
                 >
                   <input
                     type="checkbox"
-                    class="opt-extra w-4 h-4 rounded border-zinc-600 text-amber-400 focus:ring-amber-400 focus:ring-offset-0"
+                    class="opt-extra w-4 h-4 rounded border-zinc-600 text-red-600 focus:ring-red-600 focus:ring-offset-0"
                     data-extra="3000"
                     value="extra bacon"
                   />
@@ -419,7 +412,7 @@ console.log("Productos cargados en Astro:", products?.length);
                 >
                   <input
                     type="checkbox"
-                    class="opt-extra w-4 h-4 rounded border-zinc-600 text-amber-400 focus:ring-amber-400 focus:ring-offset-0"
+                    class="opt-extra w-4 h-4 rounded border-zinc-600 text-red-600 focus:ring-red-600 focus:ring-offset-0"
                     data-extra="3000"
                     value="carne extra"
                   />
@@ -435,7 +428,7 @@ console.log("Productos cargados en Astro:", products?.length);
               </label>
               <textarea
                 id="custom-notes"
-                class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-200 focus:outline-none focus:ring-2 focus:ring-amber-400"
+                class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-200 focus:outline-none focus:ring-2 focus:ring-red-600"
                 rows="3"
                 placeholder="Ej: bien cocida, sin sal, cortar a la mitad..."
               ></textarea>
@@ -447,7 +440,7 @@ console.log("Productos cargados en Astro:", products?.length);
         <div class="p-4 sm:p-6 border-t border-zinc-800 flex-shrink-0">
           <button
             id="btn-add-customized"
-            class="w-full rounded-full bg-amber-400 hover:bg-amber-300 px-6 py-3 text-sm font-semibold text-zinc-950 transition active:scale-95"
+            class="w-full rounded-full bg-red-600 hover:bg-red-700 px-6 py-3 text-sm font-semibold text-white transition active:scale-95"
             type="button"
           >
             Guardar cambios
@@ -483,7 +476,7 @@ console.log("Productos cargados en Astro:", products?.length);
             <button
               id="btn-confirm-yes"
               type="button"
-              class="px-6 py-3 rounded-full text-sm bg-amber-400 text-zinc-950 font-semibold hover:bg-amber-300 transition order-1 sm:order-2"
+              class="px-6 py-3 rounded-full text-sm bg-red-600 text-white font-semibold hover:bg-red-700 transition order-1 sm:order-2"
             >
               Personalizar pedido
             </button>
@@ -561,8 +554,8 @@ console.log("Productos cargados en Astro:", products?.length);
 
     input[type="checkbox"].opt-remove:checked,
     input[type="checkbox"].opt-extra:checked {
-      background-color: #fbbf24;
-      border-color: #fbbf24;
+      background-color: #dc2626;
+      border-color: #dc2626;
     }
 
     input[type="checkbox"].opt-remove:checked::after,
@@ -572,7 +565,7 @@ console.log("Productos cargados en Astro:", products?.length);
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color: #18181b;
+      color: #ffffff;
       font-size: 0.75rem;
       font-weight: bold;
     }
@@ -769,7 +762,7 @@ console.log("Productos cargados en Astro:", products?.length);
               </div>
               ${
                 item.notes
-                  ? `<p class="text-xs text-amber-400 italic mt-1">${item.notes}</p>`
+                  ? `<p class="text-xs text-red-400 italic mt-1">${item.notes}</p>`
                   : ""
               }
               <div class="flex items-center gap-2 mt-2">
@@ -791,7 +784,7 @@ console.log("Productos cargados en Astro:", products?.length);
 
                 <div class="ml-auto flex flex-col items-end gap-1">
                   <button
-                    class="btn-edit text-xs text-amber-300 hover:text-amber-200 transition"
+                    class="btn-edit text-xs text-red-400 hover:text-red-300 transition"
                     data-index="${index}"
                     aria-label="Volver a personalizar este producto"
                   >
@@ -1053,24 +1046,24 @@ console.log("Productos cargados en Astro:", products?.length);
 
           filterButtons.forEach((b) => {
             b.classList.remove(
-              "bg-amber-400",
-              "border-amber-400",
-              "text-zinc-950",
+              "bg-red-600",
+              "border-red-600",
+              "text-white",
               "font-semibold",
               "shadow",
-              "shadow-amber-500/40"
+              "shadow-red-500/40"
             );
             b.classList.add("bg-zinc-900", "border-zinc-700", "text-zinc-300");
           });
 
           btn.classList.remove("bg-zinc-900", "border-zinc-700", "text-zinc-300");
           btn.classList.add(
-            "bg-amber-400",
-            "border-amber-400",
-            "text-zinc-950",
+            "bg-red-600",
+            "border-red-600",
+            "text-white",
             "font-semibold",
             "shadow",
-            "shadow-amber-500/40"
+            "shadow-red-500/40"
           );
 
           aplicarFiltro();
