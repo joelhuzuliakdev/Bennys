@@ -5,7 +5,10 @@ console.log("Productos cargados en Astro:", products?.length);
 ---
 
 <Layout title="Benny´s">
-  <main class="min-h-screen bg-[url('/fondo.jpg')] bg-cover bg-center bg-no-repeat bg-fixed">
+  <!-- FONDO FIJO -->
+  <div class="fixed inset-0 bg-[url('/fondo.jpg')] bg-cover bg-center bg-no-repeat z-0"></div>
+  
+  <main class="min-h-screen relative z-10">
     <section class="container mx-auto px-4 py-8">
       <!-- HEADER / NAV CON LOGO + BOTÓN CARRITO -->
       <section
@@ -180,7 +183,7 @@ console.log("Productos cargados en Astro:", products?.length);
       </p>
 
       <!-- GRID DE PRODUCTOS -->
-      <section id="products-grid" class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      <section id="products-grid" class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 min-h-[800px]">
         {products.map((product) => (
           <article
             class="product-card bg-zinc-900/90 border border-zinc-800 rounded-2xl overflow-hidden flex flex-col shadow-lg shadow-black/50 hover:-translate-y-1 hover:shadow-2xl hover:border-zinc-700 transition-all duration-300"
