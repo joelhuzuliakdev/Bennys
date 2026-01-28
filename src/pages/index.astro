@@ -189,6 +189,7 @@ console.log("Productos cargados en Astro:", products?.length);
             data-price={product.price || 0}
             data-name={product.name}
             data-description={product.description}
+            data-ingredients={product.ingredients ? JSON.stringify(product.ingredients) : "[]"}
             style="animation: fadeIn 0.5s ease-out"
           >
             <div class="h-56 w-full bg-zinc-800 overflow-hidden relative">
@@ -441,66 +442,9 @@ console.log("Productos cargados en Astro:", products?.length);
               </div>
             </div>
 
-            <!-- Quitar ingredientes -->
-            <div class="mb-6">
-              <h3 class="text-sm font-semibold text-zinc-100 mb-2">
-                ¿Querés sacar algo?
-              </h3>
-              <p class="text-xs text-zinc-400 mb-3">
-                Tildá lo que NO querés que lleve tu pedido:
-              </p>
-              <div class="flex flex-wrap gap-2 text-xs text-zinc-200">
-                <label
-                  class="inline-flex items-center gap-2 bg-zinc-800 rounded-full px-4 py-2.5 cursor-pointer hover:bg-zinc-700 transition active:bg-zinc-600"
-                >
-                  <input
-                    type="checkbox"
-                    class="opt-remove w-4 h-4 rounded border-zinc-600 text-red-600 focus:ring-red-600 focus:ring-offset-0"
-                    value="sin queso"
-                  />
-                  <span>Sin queso</span>
-                </label>
-                <label
-                  class="inline-flex items-center gap-2 bg-zinc-800 rounded-full px-4 py-2.5 cursor-pointer hover:bg-zinc-700 transition active:bg-zinc-600"
-                >
-                  <input
-                    type="checkbox"
-                    class="opt-remove w-4 h-4 rounded border-zinc-600 text-red-600 focus:ring-red-600 focus:ring-offset-0"
-                    value="sin cebolla"
-                  />
-                  <span>Sin cebolla</span>
-                </label>
-                <label
-                  class="inline-flex items-center gap-2 bg-zinc-800 rounded-full px-4 py-2.5 cursor-pointer hover:bg-zinc-700 transition active:bg-zinc-600"
-                >
-                  <input
-                    type="checkbox"
-                    class="opt-remove w-4 h-4 rounded border-zinc-600 text-red-600 focus:ring-red-600 focus:ring-offset-0"
-                    value="sin lechuga"
-                  />
-                  <span>Sin lechuga</span>
-                </label>
-                <label
-                  class="inline-flex items-center gap-2 bg-zinc-800 rounded-full px-4 py-2.5 cursor-pointer hover:bg-zinc-700 transition active:bg-zinc-600"
-                >
-                  <input
-                    type="checkbox"
-                    class="opt-remove w-4 h-4 rounded border-zinc-600 text-red-600 focus:ring-red-600 focus:ring-offset-0"
-                    value="sin tomate"
-                  />
-                  <span>Sin tomate</span>
-                </label>
-                <label
-                  class="inline-flex items-center gap-2 bg-zinc-800 rounded-full px-4 py-2.5 cursor-pointer hover:bg-zinc-700 transition active:bg-zinc-600"
-                >
-                  <input
-                    type="checkbox"
-                    class="opt-remove w-4 h-4 rounded border-zinc-600 text-red-600 focus:ring-red-600 focus:ring-offset-0"
-                    value="sin aderezos"
-                  />
-                  <span>Sin aderezos</span>
-                </label>
-              </div>
+            <!-- Quitar ingredientes (DINÁMICO) -->
+            <div id="remove-ingredients-section" class="mb-6">
+              <!-- Se genera dinámicamente -->
             </div>
 
             <!-- Extras -->
@@ -589,7 +533,7 @@ console.log("Productos cargados en Astro:", products?.length);
             ¿Querés personalizar tu pedido antes de agregarlo?
           </h2>
           <p class="text-sm text-zinc-300 mb-6">
-            Podés elegir el tamaño (simple, doble o triple), sacar ingredientes (sin lechuga, sin salsas, etc.) o sumar extras como queso,
+            Podés elegir el tamaño (simple, doble o triple), sacar ingredientes o sumar extras como queso,
             bacon o carne extra.
           </p>
           <div class="flex flex-col sm:flex-row justify-end gap-3">
@@ -826,7 +770,6 @@ console.log("Productos cargados en Astro:", products?.length);
       const btnConfirmNo = document.getElementById("btn-confirm-no");
       const btnConfirmYes = document.getElementById("btn-confirm-yes");
 
-      const removeOptions = document.querySelectorAll(".opt-remove");
       const extraOptions = document.querySelectorAll(".opt-extra");
       const sizeRadios = document.querySelectorAll(".size-radio");
 
@@ -845,9 +788,52 @@ console.log("Productos cargados en Astro:", products?.length);
           const price = priceText.startsWith("$") 
             ? parseFloat(priceText.replace(/\$|\.|\,/g, "")) 
             : null;
-          return { id, name, image, description, category, price };
+          
+          // Obtener ingredientes del data-attribute
+          const ingredientsStr = card.dataset.ingredients || "[]";
+          let ingredients = [];
+          try {
+            ingredients = JSON.parse(ingredientsStr);
+          } catch (e) {
+            console.warn("Error parsing ingredients for product", id, e);
+          }
+          
+          return { id, name, image, description, category, price, ingredients };
         }
       );
+
+      // ============ FUNCIÓN PARA GENERAR OPCIONES DINÁMICAS DE INGREDIENTES ============
+      function renderRemoveIngredientsOptions(ingredients) {
+        const section = document.getElementById('remove-ingredients-section');
+        
+        if (!ingredients || ingredients.length === 0) {
+          section.innerHTML = '';
+          return;
+        }
+
+        const html = `
+          <h3 class="text-sm font-semibold text-zinc-100 mb-2">
+            ¿Querés sacar algo?
+          </h3>
+          <p class="text-xs text-zinc-400 mb-3">
+            Tildá lo que NO querés que lleve tu pedido:
+          </p>
+          <div class="flex flex-wrap gap-2 text-xs text-zinc-200">
+            ${ingredients.map(ingredient => `
+              <label class="inline-flex items-center gap-2 bg-zinc-800 rounded-full px-4 py-2.5 cursor-pointer hover:bg-zinc-700 transition active:bg-zinc-600">
+                <input
+                  type="checkbox"
+                  class="opt-remove w-4 h-4 rounded border-zinc-600 text-red-600 focus:ring-red-600 focus:ring-offset-0"
+                  value="sin ${ingredient.toLowerCase()}"
+                />
+                <span>Sin ${ingredient}</span>
+              </label>
+            `).join('')}
+          </div>
+        `;
+        
+        section.innerHTML = html;
+      }
 
       // ============ FUNCIONES DE CARRITO ============
 
@@ -1021,12 +1007,19 @@ console.log("Productos cargados en Astro:", products?.length);
               editingCartIndex = index;
               currentCustomizingProduct = item.id;
 
+              // Obtener el producto original para cargar sus ingredientes
+              const originalProduct = productsData.find((p) => p.id === item.id);
+              if (originalProduct && originalProduct.ingredients) {
+                renderRemoveIngredientsOptions(originalProduct.ingredients);
+              }
+
               // Restaurar el tamaño seleccionado
               sizeRadios.forEach((radio) => {
                 radio.checked = radio.value === item.size;
               });
 
-              removeOptions.forEach((o) => (o.checked = false));
+              // Limpiar opciones
+              document.querySelectorAll(".opt-remove").forEach((o) => (o.checked = false));
               extraOptions.forEach((o) => (o.checked = false));
               customNotes.value = item.notes || "";
 
@@ -1078,10 +1071,10 @@ console.log("Productos cargados en Astro:", products?.length);
         closeModal(customizeModal);
         currentCustomizingProduct = null;
         editingCartIndex = null;
+        renderRemoveIngredientsOptions([]);
         sizeRadios.forEach((radio) => {
           radio.checked = radio.value === "simple";
         });
-        removeOptions.forEach((o) => (o.checked = false));
         extraOptions.forEach((o) => (o.checked = false));
         customNotes.value = "";
       });
@@ -1090,6 +1083,7 @@ console.log("Productos cargados en Astro:", products?.length);
           closeModal(customizeModal);
           currentCustomizingProduct = null;
           editingCartIndex = null;
+          renderRemoveIngredientsOptions([]);
         }
       });
 
@@ -1131,13 +1125,22 @@ console.log("Productos cargados en Astro:", products?.length);
           e.preventDefault();
           e.stopPropagation();
           
-          currentCustomizingProduct = btn.dataset.productId;
+          const productId = btn.dataset.productId;
+          currentCustomizingProduct = productId;
           pendingProductId = null;
           editingCartIndex = null;
+          
+          // Cargar ingredientes del producto
+          const product = productsData.find((p) => p.id === String(productId));
+          if (product && product.ingredients) {
+            renderRemoveIngredientsOptions(product.ingredients);
+          } else {
+            renderRemoveIngredientsOptions([]);
+          }
+          
           sizeRadios.forEach((radio) => {
             radio.checked = radio.value === "simple";
           });
-          removeOptions.forEach((o) => (o.checked = false));
           extraOptions.forEach((o) => (o.checked = false));
           customNotes.value = "";
           openModal(customizeModal);
@@ -1165,12 +1168,21 @@ console.log("Productos cargados en Astro:", products?.length);
           closeModal(confirmModal);
           return;
         }
+        
         currentCustomizingProduct = pendingProductId;
         editingCartIndex = null;
+        
+        // Cargar ingredientes del producto
+        const product = productsData.find((p) => p.id === String(pendingProductId));
+        if (product && product.ingredients) {
+          renderRemoveIngredientsOptions(product.ingredients);
+        } else {
+          renderRemoveIngredientsOptions([]);
+        }
+        
         sizeRadios.forEach((radio) => {
           radio.checked = radio.value === "simple";
         });
-        removeOptions.forEach((o) => (o.checked = false));
         extraOptions.forEach((o) => (o.checked = false));
         customNotes.value = "";
         openModal(customizeModal);
@@ -1194,6 +1206,8 @@ console.log("Productos cargados en Astro:", products?.length);
         const notesParts = [];
         let extraAmount = 0;
 
+        // Obtener opciones de remover ingredientes (dinámicas)
+        const removeOptions = document.querySelectorAll(".opt-remove");
         removeOptions.forEach((opt) => {
           if (opt.checked) notesParts.push(opt.value);
         });
@@ -1238,10 +1252,10 @@ console.log("Productos cargados en Astro:", products?.length);
         closeModal(customizeModal);
         currentCustomizingProduct = null;
         editingCartIndex = null;
+        renderRemoveIngredientsOptions([]);
         sizeRadios.forEach((radio) => {
           radio.checked = radio.value === "simple";
         });
-        removeOptions.forEach((o) => (o.checked = false));
         extraOptions.forEach((o) => (o.checked = false));
         customNotes.value = "";
       });

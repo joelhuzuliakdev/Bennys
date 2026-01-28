@@ -6,7 +6,11 @@ export const products = [
     price: 12000,
     image: "/hamburguesas/hamburguesa-simple.jpg",
     description: "Pan de papa, carne, cebolla brunoise, mostaza y kétchup",
-    ingredients: ["Carne", "Cebolla Brunoise", "Mostaza", "kétchup"]
+    ingredients: [
+      "Cebolla Brunoise",
+      "Mostaza", 
+      "kétchup"
+    ]
   },
   {
     id: 2,
@@ -16,7 +20,6 @@ export const products = [
     image: "/hamburguesas/hamburguesa-doble.jpg",
     description: "Pan de papa, carne, queso cheeddar, tomate, lechuga, cebolla brunoise y mayonesa",
     ingredients: [
-      "Carne",
       "Queso Cheddar",
       "Tomate",
       "Lechuga",
@@ -32,7 +35,6 @@ export const products = [
     image: "/hamburguesas/hamburguesa-triple.jpg",
     description: "Pan de papa, carne, queso cheeddar",
     ingredients: [
-      "Carne",
       "Queso Cheddar"
     ]
   },
@@ -44,7 +46,6 @@ export const products = [
     image: "/hamburguesas/hamburguesa-simple.jpg",
     description: "Pan de papa, carne, triple cheddar bien derretido, cebolla caramelizada y aderezo Benny´s",
     ingredients: [
-      "Carne",
       "Queso Cheddar",
       "Cebolla Caramelizada",
       "Aderezo Benny´s"
@@ -58,7 +59,6 @@ export const products = [
     image: "/hamburguesas/hamburguesa-simple.jpg",
     description: "Pan de papa, carne, queso cheddar blanco ahumado, panceta, lechuga, tomate y aderezo Benny´s",
     ingredients: [
-      "Carne",
       "Queso Cheddar Blanco Ahumado",
       "Panceta",
       "Lechuga",
@@ -74,7 +74,6 @@ export const products = [
     image: "/hamburguesas/hamburguesa-simple.jpg",
     description: "Pan de papa, carne, queso cheddar, panceta, cebolla crispy y kétchup",
     ingredients: [
-      "Carne",
       "Queso Cheddar",
       "Panceta",
       "Cebolla Crispy",
@@ -89,7 +88,6 @@ export const products = [
     image: "/hamburguesas/hamburguesa-simple.jpg",
     description: "Pan tostado doble, carne, cebolla caramelizada, cebolla crispy, panceta, kétchup, mayonesa y triple cheddar",
     ingredients: [
-      "Carne",
       "Cebolla Caramelizada",
       "Cebolla Crispy",
       "Panceta",
@@ -106,7 +104,6 @@ export const products = [
     image: "/hamburguesas/hamburguesa-simple.jpg",
     description: "Pan de papa, carne, cheddar blanco ahumado, salsa criolla, mayo chimi, lechuga y tomate",
     ingredients: [
-      "Carne", 
       "Cheddar Blanco Ahumado",
       "Salsa Criolla",
       "Mayo Chimi",
@@ -149,7 +146,6 @@ export const products = [
     image: "/vegano/hamburguesa-vegana.jpg",
     description: "Pan de papa, medallón VEGGIE, queso cheddar y toppings a elección",
     ingredients: [
-      "Medallo Veggie",
       "Queso Cheddar",
       "Toppings"
     ]
