@@ -155,15 +155,15 @@ console.log("Productos cargados en Astro:", products?.length);
       </section>
 
       <!-- FILTROS -->
-      <section id="filters" class="flex flex-wrap gap-2 justify-center mb-8 text-sm px-4">
+      <section id="filters" class="flex flex-wrap gap-3 justify-center mb-8 text-sm px-4">
         {categories.map((cat) => (
           <button
             type="button"
             data-filter={cat.id}
-            class={`filter-btn px-4 py-2 rounded-full border text-xs uppercase tracking-wide transition ${
+            class={`filter-btn px-6 py-2.5 rounded-full border-2 text-xs uppercase tracking-wider font-bold transition-all duration-300 ${
               cat.id === "todos"
-                ? "bg-red-600 border-red-600 text-white font-semibold shadow shadow-red-500/40"
-                : "bg-zinc-900 border-zinc-700 text-zinc-300 hover:bg-zinc-800"
+                ? "active bg-red-600 border-white text-white shadow-lg shadow-red-500/50"
+                : "bg-black/70 border-white text-zinc-200 hover:bg-zinc-700 hover:border-zinc-500"
             }`}
             aria-label={`Filtrar por ${cat.name}`}
           >
