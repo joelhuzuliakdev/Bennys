@@ -1,97 +1,121 @@
 export const products = [
   {
     id: 1,
-    name: "Hamburguesa Clásica",
+    name: "Cuarto Benny´s",
     category: "hamburguesas",
     price: 12000,
     image: "/hamburguesas/hamburguesa-simple.jpg",
-    description: "Hamburguesa con carne, lechuga, tomate y queso",
-    ingredients: ["Carne", "Lechuga", "Tomate", "Queso", "Pan", "Salsa"]
+    description: "Pan de papa, carne, cebolla brunoise, mostaza y kétchup",
+    ingredients: ["Carne", "Cebolla Brunoise", "Mostaza", "kétchup"]
   },
   {
     id: 2,
-    name: "Hamburguesa Doble",
+    name: "Big American",
     category: "hamburguesas",
     price: 12300,
     image: "/hamburguesas/hamburguesa-doble.jpg",
-    description: "Doble carne con queso cheddar",
+    description: "Pan de papa, carne, queso cheeddar, tomate, lechuga, cebolla brunoise y mayonesa",
     ingredients: [
-      "Doble Carne",
+      "Carne",
       "Queso Cheddar",
-      "Cebolla",
-      "Pepinillos",
-      "Pan",
-      "Salsa especial"
+      "Tomate",
+      "Lechuga",
+      "Cebolla Brunoise",
+      "Mayonesa"
     ]
   },
   {
     id: 3,
-    name: "Hamburguesa Triple",
+    name: "Cheese Burguer",
     category: "hamburguesas",
     price: 20999,
     image: "/hamburguesas/hamburguesa-triple.jpg",
-    description: "Triple carne con queso cheddar",
+    description: "Pan de papa, carne, queso cheeddar",
     ingredients: [
-      "Triple Carne",
-      "Queso Cheddar",
-      "Cebolla",
-      "Pepinillos",
-      "Pan",
-      "Salsa especial"
-    ]
-  },
-  {
-    id: 3,
-    name: "Pizza Clásica",
-    category: "pizzas",
-    price: 15000,
-    image: "/pizzas/pizza-clasica.jpg",
-    description: "Pizza clásica con tomate y mozzarella",
-    ingredients: [
-      "Salsa de tomate",
-      "Mozzarella",
-      "Albahaca",
-      "Aceite de oliva"
+      "Carne",
+      "Queso Cheddar"
     ]
   },
   {
     id: 4,
-    name: "Pizza Calabreza",
-    category: "pizzas",
-    price: 16000,
-    image: "/pizzas/pizza-calabreza.jpg",
-    description: "Pizza con salame y queso",
-    ingredients: ["Salsa de tomate", "Mozzarella", "Pepperoni", "Orégano"]
+    name: "Benny´s Melt",
+    category: "hamburguesas",
+    price: 15000,
+    image: "/hamburguesas/hamburguesa-simple.jpg",
+    description: "Pan de papa, carne, triple cheddar bien derretido, cebolla caramelizada y aderezo Benny´s",
+    ingredients: [
+      "Carne",
+      "Queso Cheddar",
+      "Cebolla Caramelizada",
+      "Aderezo Benny´s"
+    ]
   },
   {
     id: 5,
-    name: "Lomo Clásico",
-    category: "lomitos",
-    price: 15000,
-    image: "/lomitos/lomo-clasico.jpg",
-    description: "Lomo, lechuga, tomate, mayo cacera, queso",
-    ingredients: ["Lomo", "Pan", "Mayonesa", "Tomate", "Lechuga", "Queso"]
+    name: "Benny´s Deluxe",
+    category: "hamburguesas",
+    price: 16000,
+    image: "/hamburguesas/hamburguesa-simple.jpg",
+    description: "Pan de papa, carne, queso cheddar blanco ahumado, panceta, lechuga, tomate y aderezo Benny´s",
+    ingredients: [
+      "Carne",
+      "Queso Cheddar Blanco Ahumado",
+      "Panceta",
+      "Lechuga",
+      "Tomate",
+      "Aderezo Benny´s"
+    ]
   },
   {
     id: 6,
-    name: "Lomo Para Dos",
-    category: "lomitos",
-    price: 14000,
-    image: "/lomitos/lomo-para-dos.jpg",
-    description: "Lomo, lechuga, tomate, mayo cacera, queso",
-    ingredients: ["Lomo", "Pan", "Mayonesa", "Tomate", "Lechuga", "Queso"]
+    name: "Benny´s Crunch",
+    category: "hamburguesas",
+    price: 15000,
+    image: "/hamburguesas/hamburguesa-simple.jpg",
+    description: "Pan de papa, carne, queso cheddar, panceta, cebolla crispy y kétchup",
+    ingredients: [
+      "Carne",
+      "Queso Cheddar",
+      "Panceta",
+      "Cebolla Crispy",
+      "kétchup"
+    ]
   },
   {
     id: 7,
-    name: "LomoPizza",
-    category: "lomitos",
-    price: 20000,
-    image: "/lomitos/lomo-pizza.jpg",
-    description: "Lomo, lechuga, tomate, mayo cacera, queso, salsa",
-    ingredients: ["Lomo", "Pan", "Mayonesa", "Tomate", "Lechuga", "Queso", "Salsa"]
+    name: "Melt Turbo",
+    category: "hamburguesas",
+    price: 14000,
+    image: "/hamburguesas/hamburguesa-simple.jpg",
+    description: "Pan tostado doble, carne, cebolla caramelizada, cebolla crispy, panceta, kétchup, mayonesa y triple cheddar",
+    ingredients: [
+      "Carne",
+      "Cebolla Caramelizada",
+      "Cebolla Crispy",
+      "Panceta",
+      "kétchup",
+      "Mayonesa",
+      "Queso Cheddar",
+    ]
   },
   {
     id: 8,
+    name: "Argenta",
+    category: "hamburguesas",
+    price: 20000,
+    image: "/hamburguesas/hamburguesa-simple.jpg",
+    description: "Pan de papa, carne, cheddar blanco ahumado, salsa criolla, mayo chimi, lechuga y tomate",
+    ingredients: [
+      "Carne", 
+      "Cheddar Blanco Ahumado",
+      "Salsa Criolla",
+      "Mayo Chimi",
+      "Lechuga",
+      "Tomate"
+    ]
+  },
+  {
+    id: 9,
     name: "Coca Cola",
     category: "bebidas",
     price: 1700,
@@ -100,7 +124,7 @@ export const products = [
     ingredients: []
   },
   {
-    id: 9,
+    id: 10,
     name: "Sprite",
     category: "bebidas",
     price: 1500,
@@ -109,7 +133,7 @@ export const products = [
     ingredients: []
   },
   {
-    id: 10,
+    id: 11,
     name: "Pepsi",
     category: "bebidas",
     price: 1600,
@@ -118,34 +142,20 @@ export const products = [
     ingredients: []
   },
   {
-    id: 11,
-    name: "Sandwich De Bondiola",
-    category: "sandwichs",
-    price: 8000,
-    image: "/sandwichs/sandwich-bondiola.jpeg",
-    description: "Bondiola desmenuzada",
-    ingredients: []
-  },
-  {
     id: 12,
-    name: "Hamburguesa Vegana",
+    name: "Benny´s Veggie",
     category: "vegano",
     price: 10000,
     image: "/vegano/hamburguesa-vegana.jpg",
-    description: "Hamburguesa Vegana",
-    ingredients: []
+    description: "Pan de papa, medallón VEGGIE, queso cheddar y toppings a elección",
+    ingredients: [
+      "Medallo Veggie",
+      "Queso Cheddar",
+      "Toppings"
+    ]
   },
   {
     id: 13,
-    name: "Lomo Vegano",
-    category: "vegano",
-    price: 13000,
-    image: "/vegano/lomo-vegano.png",
-    description: "Lomo Vegano",
-    ingredients: []
-  },
-  {
-    id: 14,
     name: "Chocotorta",
     category: "postre",
     price: 8000,
@@ -176,9 +186,6 @@ export const products = [
 export const categories = [
   { id: "todos", name: "Todos" },
   { id: "hamburguesas", name: "Hamburguesas" },
-  { id: "lomitos", name: "Lomitos" },
-  { id: "sandwichs", name: "Sandwichs" },
-  { id: "pizzas", name: "Pizzas" },
   { id: "vegano", name: "Vegano" },
   { id: "postre", name: "Postres" },
   { id: "bebidas", name: "Bebidas" }
