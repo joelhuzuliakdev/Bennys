@@ -5,10 +5,7 @@ console.log("Productos cargados en Astro:", products?.length);
 ---
 
 <Layout title="Benny´s">
-  <!-- FONDO FIJO -->
-  <div class="fixed inset-0 bg-[url('/fondo.jpg')] bg-cover bg-center bg-no-repeat z-0"></div>
-  
-  <main class="min-h-screen relative z-10">
+  <main class="min-h-screen relative">
     <section class="container mx-auto px-4 py-8">
       <!-- HEADER / NAV CON LOGO + BOTÓN CARRITO -->
       <section
@@ -562,6 +559,16 @@ console.log("Productos cargados en Astro:", products?.length);
 
   <!-- Animaciones simples usadas en la UI -->
   <style>
+    /* Fondo global que cubre todo el documento */
+    :global(body) {
+      background-image: url('/fondo.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: scroll;
+      min-height: 100vh;
+    }
+    
     @keyframes fadeIn {
       from {
         opacity: 0;
