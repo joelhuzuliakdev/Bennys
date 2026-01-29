@@ -196,10 +196,11 @@ console.log("Productos cargados en Astro:", products?.length);
           >
             <div class="h-56 w-full bg-zinc-800 overflow-hidden relative">
               <img
-                src={product.image}
+                data-src={product.image}
                 alt={`${product.name} - ${product.description}`}
-                class="h-full w-full object-cover hover:scale-105 transition-transform duration-500 product-image"
+                class="product-image h-full w-full object-cover hover:scale-105 transition-all duration-500 opacity-0"
                 loading="lazy"
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%2327272a' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%2352525b' font-family='sans-serif' font-size='14'%3ECargando...%3C/text%3E%3C/svg%3E"
               />
               {/* Badge Popular / Nuevo */}
               {product.badge && (
@@ -309,13 +310,24 @@ console.log("Productos cargados en Astro:", products?.length);
           </p>
         </div>
 
-        <!-- Footer con total y botón WhatsApp -->
+        <!-- Footer con total y botones -->
         <div class="p-6 border-t border-zinc-800 bg-zinc-950/50">
           <div class="flex items-center justify-between mb-4">
             <span class="text-zinc-400 text-sm">Total:</span>
             <span id="cart-total" class="text-2xl font-bold text-red-400">
               $0
             </span>
+          </div>
+
+          <div class="flex gap-2 mb-3">
+            <button
+              id="btn-clear-cart"
+              class="flex-1 rounded-full bg-zinc-800 hover:bg-zinc-700 px-4 py-2 text-xs font-medium text-zinc-300 transition disabled:opacity-50 disabled:cursor-not-allowed"
+              type="button"
+              disabled
+            >
+              Vaciar carrito
+            </button>
           </div>
 
           <button
@@ -609,6 +621,15 @@ console.log("Productos cargados en Astro:", products?.length);
       animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
 
+    /* Transición suave para imágenes cuando se cargan */
+    .product-image {
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .product-image.loaded {
+      opacity: 1 !important;
+    }
+
     /* Prevenir zoom en iOS en inputs */
     input[type="checkbox"],
     input[type="radio"],
@@ -710,6 +731,41 @@ console.log("Productos cargados en Astro:", products?.length);
   <!-- LÓGICA DEL CARRITO -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
+      // ============ LAZY LOADING MEJORADO CON INTERSECTION OBSERVER ============
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            const src = img.dataset.src;
+            
+            if (src) {
+              // Crear imagen temporal para pre-cargar
+              const tempImg = new Image();
+              tempImg.onload = () => {
+                img.src = src;
+                img.classList.add('loaded');
+                img.removeAttribute('data-src');
+              };
+              tempImg.onerror = () => {
+                console.warn('Error cargando imagen:', src);
+                img.classList.add('loaded'); // Mostrar placeholder aunque falle
+              };
+              tempImg.src = src;
+              
+              observer.unobserve(img);
+            }
+          }
+        });
+      }, {
+        rootMargin: '50px', // Cargar 50px antes de que sea visible
+        threshold: 0.01
+      });
+
+      // Aplicar lazy loading a todas las imágenes de productos
+      document.querySelectorAll('.product-image').forEach(img => {
+        imageObserver.observe(img);
+      });
+
       // ============ VERIFICACIÓN DE HORARIOS ============
       function checkBusinessStatus() {
         const now = new Date();
@@ -753,8 +809,71 @@ console.log("Productos cargados en Astro:", products?.length);
       // Actualizar cada minuto
       setInterval(checkBusinessStatus, 60000);
 
-      // ============ DATOS DEL CARRITO (en memoria) ============
-      let cart = [];
+      // ============ PERSISTENCIA DEL CARRITO ============
+      const CART_STORAGE_KEY = 'bennys-cart';
+      const CART_EXPIRY_KEY = 'bennys-cart-expiry';
+      const CART_EXPIRY_HOURS = 24; // El carrito expira después de 24 horas
+
+      function saveCart(cartData) {
+        try {
+          const now = new Date().getTime();
+          const expiryTime = now + (CART_EXPIRY_HOURS * 60 * 60 * 1000);
+          
+          localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartData));
+          localStorage.setItem(CART_EXPIRY_KEY, expiryTime.toString());
+          
+          console.log('💾 Carrito guardado:', cartData.length, 'items');
+        } catch (error) {
+          console.warn('⚠️ Error al guardar el carrito:', error);
+          // Si hay error de espacio, limpiar y reintentar
+          if (error.name === 'QuotaExceededError') {
+            clearCart();
+            showNotification('⚠️ Límite de almacenamiento alcanzado');
+          }
+        }
+      }
+
+      function loadCart() {
+        try {
+          const expiryTime = localStorage.getItem(CART_EXPIRY_KEY);
+          const now = new Date().getTime();
+          
+          // Verificar si el carrito ha expirado
+          if (expiryTime && now > parseInt(expiryTime)) {
+            console.log('⏰ Carrito expirado, limpiando...');
+            clearCart();
+            return [];
+          }
+          
+          const savedCart = localStorage.getItem(CART_STORAGE_KEY);
+          if (savedCart) {
+            const parsedCart = JSON.parse(savedCart);
+            console.log('📦 Carrito cargado:', parsedCart.length, 'items');
+            
+            // Mostrar notificación si hay items
+            if (parsedCart.length > 0) {
+              setTimeout(() => {
+                showNotification(`🛒 Tienes ${parsedCart.length} ${parsedCart.length === 1 ? 'producto' : 'productos'} en tu carrito`);
+              }, 500);
+            }
+            
+            return parsedCart;
+          }
+        } catch (error) {
+          console.warn('⚠️ Error al cargar el carrito:', error);
+          clearCart();
+        }
+        return [];
+      }
+
+      function clearCart() {
+        localStorage.removeItem(CART_STORAGE_KEY);
+        localStorage.removeItem(CART_EXPIRY_KEY);
+        console.log('🗑️ Carrito limpiado');
+      }
+
+      // ============ DATOS DEL CARRITO ============
+      let cart = loadCart(); // Cargar desde localStorage
       let currentCustomizingProduct = null;
       let pendingProductId = null;
       let editingCartIndex = null;
@@ -770,6 +889,7 @@ console.log("Productos cargados en Astro:", products?.length);
       const cartTotal = document.getElementById("cart-total");
       const cartCount = document.getElementById("cart-count");
       const btnWhatsApp = document.getElementById("btn-whatsapp");
+      const btnClearCart = document.getElementById("btn-clear-cart");
 
       const customizeModal = document.getElementById("customize-modal");
       const btnCloseCustomize = document.getElementById("btn-close-customize");
@@ -788,7 +908,7 @@ console.log("Productos cargados en Astro:", products?.length);
         (card) => {
           const id = card.dataset.id;
           const name = card.querySelector(".product-name")?.textContent?.trim() || "";
-          const image = card.querySelector(".product-image")?.getAttribute("src") || "";
+          const image = card.querySelector(".product-image")?.getAttribute("data-src") || "";
           const description =
             card.querySelector(".product-description")?.textContent?.trim() || "";
           const category = card.dataset.category || "todos";
@@ -869,7 +989,7 @@ console.log("Productos cargados en Astro:", products?.length);
             notes: "",
           });
           updateCart();
-          showNotification(`Se agregó "${product.name}" al carrito`);
+          showNotification(`✅ "${product.name}" agregado al carrito`);
           return;
         }
 
@@ -895,12 +1015,14 @@ console.log("Productos cargados en Astro:", products?.length);
         });
 
         updateCart();
-        showNotification(`Se agregó "${fullName}" al carrito`);
+        showNotification(`✅ "${fullName}" agregado al carrito`);
       }
 
       function removeFromCart(index) {
+        const item = cart[index];
         cart.splice(index, 1);
         updateCart();
+        showNotification(`🗑️ "${item.name}" eliminado del carrito`);
       }
 
       function updateQuantity(index, delta) {
@@ -917,6 +1039,9 @@ console.log("Productos cargados en Astro:", products?.length);
       }
 
       function updateCart() {
+        // Guardar en localStorage cada vez que se actualiza
+        saveCart(cart);
+
         const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
         cartCount.textContent = totalItems;
 
@@ -925,6 +1050,7 @@ console.log("Productos cargados en Astro:", products?.length);
             Tu carrito está vacío
           </p>`;
           btnWhatsApp.disabled = true;
+          btnClearCart.disabled = true;
         } else {
           cartItems.innerHTML = cart
             .map(
@@ -1038,10 +1164,22 @@ console.log("Productos cargados en Astro:", products?.length);
           });
 
           btnWhatsApp.disabled = false;
+          btnClearCart.disabled = false;
         }
 
         cartTotal.textContent = `$${calculateTotal().toLocaleString("es-AR")}`;
       }
+
+      // ============ BOTÓN VACIAR CARRITO ============
+      btnClearCart?.addEventListener("click", () => {
+        if (cart.length === 0) return;
+        
+        if (confirm("¿Estás seguro de que querés vaciar el carrito?")) {
+          cart = [];
+          updateCart();
+          showNotification("🗑️ Carrito vaciado");
+        }
+      });
 
       // ============ MODAL HANDLERS ============
 
@@ -1254,6 +1392,7 @@ console.log("Productos cargados en Astro:", products?.length);
             item.price = basePrice + extraAmount;
             item.notes = notes;
             updateCart();
+            showNotification("✅ Producto actualizado");
           }
         } else {
           addToCart(currentCustomizingProduct, { size, basePrice, notes, extraAmount });
@@ -1336,7 +1475,7 @@ console.log("Productos cargados en Astro:", products?.length);
       function showNotification(message) {
         const notification = document.createElement("div");
         notification.className =
-          "fixed bottom-4 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-slide-up";
+          "fixed bottom-4 right-4 bg-zinc-800 border border-zinc-700 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-slide-up max-w-[90vw]";
         notification.textContent = message;
         document.body.appendChild(notification);
 
@@ -1345,7 +1484,7 @@ console.log("Productos cargados en Astro:", products?.length);
           notification.style.transform = "translateY(20px)";
           notification.style.transition = "all 0.3s ease-out";
           setTimeout(() => notification.remove(), 300);
-        }, 2000);
+        }, 3000);
       }
 
       // ============ WHATSAPP ============
@@ -1375,7 +1514,14 @@ console.log("Productos cargados en Astro:", products?.length);
         window.open(url, "_blank");
       });
 
-      console.log("🍔 Sistema de carrito inicializado", { productsData, businessIsOpen });
+      // Inicializar el carrito al cargar
+      updateCart();
+
+      console.log("🍔 Sistema de carrito inicializado", { 
+        productsData: productsData.length,
+        cartItems: cart.length,
+        businessIsOpen 
+      });
     });
   </script>
 </Layout>
