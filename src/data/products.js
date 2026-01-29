@@ -113,33 +113,6 @@ export const products = [
   },
   {
     id: 9,
-    name: "Coca Cola",
-    category: "bebidas",
-    price: 3000,
-    image: "/gaseosas/coca-cola.jpg",
-    description: "Bebida refrescante 500ml",
-    ingredients: []
-  },
-  {
-    id: 10,
-    name: "Sprite",
-    category: "bebidas",
-    price: 3000,
-    image: "/gaseosas/sprite.jpg",
-    description: "Bebida refrescante 500ml",
-    ingredients: []
-  },
-  {
-    id: 11,
-    name: "Pepsi",
-    category: "bebidas",
-    price: 3000,
-    image: "/gaseosas/pepsi.jpg",
-    description: "Bebida refrescante 500ml",
-    ingredients: []
-  },
-  {
-    id: 12,
     name: "Benny´s Veggie",
     category: "vegano",
     price: 10000,
@@ -149,6 +122,33 @@ export const products = [
       "Queso Cheddar",
       "Toppings"
     ]
+  },
+  {
+    id: 10,
+    name: "Coca Cola",
+    category: "bebidas",
+    price: 3000,
+    image: "/gaseosas/coca-cola.jpg",
+    description: "Bebida refrescante 500ml",
+    ingredients: []
+  },
+  {
+    id: 11,
+    name: "Sprite",
+    category: "bebidas",
+    price: 3000,
+    image: "/gaseosas/sprite.jpg",
+    description: "Bebida refrescante 500ml",
+    ingredients: []
+  },
+  {
+    id: 12,
+    name: "Pepsi",
+    category: "bebidas",
+    price: 3000,
+    image: "/gaseosas/pepsi.jpg",
+    description: "Bebida refrescante 500ml",
+    ingredients: []
   },
   {
     id: 13,
