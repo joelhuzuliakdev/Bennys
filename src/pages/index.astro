@@ -2,11 +2,16 @@
 import Layout from "../layouts/Layout.astro";
 import { products, categories } from "../data/products";
 console.log("Productos cargados en Astro:", products?.length);
+
+// ===== CONFIGURACIÓN DEL NEGOCIO (EDITABLE) =====
+const WHATSAPP_NUMBER = "3572548014";
+const ALIAS_TRANSFERENCIA = "benny.burgers"; // ⬅️ CAMBIAR ESTO
+const HORA_ENTREGA_ESTIMADA = "35-45"; // ⬅️ CAMBIAR ESTO (en minutos)
+const COSTO_ENVIO = 3000; // ⬅️ CAMBIAR ESTO
+// ================================================
 ---
 
 <Layout title="Benny´s">
-  <!-- FONDO FIJO CON TAMAÑO CONSTANTE -->
-  
   <main class="min-h-screen relative" style="z-index: 1;">
     <section class="container mx-auto px-4 py-8">
       <!-- HEADER / NAV CON LOGO + BOTÓN CARRITO -->
@@ -14,9 +19,7 @@ console.log("Productos cargados en Astro:", products?.length);
         class="fixed top-0 left-0 w-full z-50 bg-zinc-950/95 backdrop-blur border-b border-zinc-800 px-4 py-4"
       >
         <div class="flex flex-col sm:flex-row items-center sm:items-center justify-between gap-4">
-          <!-- Logo centrado en mobile -->
           <a href="/" class="flex flex-col sm:flex-row items-center gap-3 hover:opacity-80 transition">
-            <!-- Tu logo aquí -->
             <img 
               src="logo_bennys.png" 
               alt="Benny's Logo" 
@@ -24,7 +27,6 @@ console.log("Productos cargados en Astro:", products?.length);
             />
           </a>
 
-          <!-- Carrito abajo en mobile, a la derecha en desktop -->
           <button
             id="btn-open-cart"
             class="inline-flex items-center gap-2 rounded-full border border-red-600 bg-zinc-900 px-4 py-2 text-sm font-medium text-red-400 hover:bg-red-600 hover:text-white transition shadow-md shadow-red-500/30"
@@ -74,7 +76,7 @@ console.log("Productos cargados en Astro:", products?.length);
 
             <div class="flex flex-wrap gap-3 text-xs text-zinc-300">
               <span>🕐 Lun-Dom: 19:00 - 00:00</span>
-              <span id="delivery-time">⏱️ Entrega en 35-45 min</span>
+              <span id="delivery-time">⏱️ Entrega en {HORA_ENTREGA_ESTIMADA} min</span>
             </div>
           </div>
 
@@ -112,7 +114,7 @@ console.log("Productos cargados en Astro:", products?.length);
 
               <div class="flex items-center gap-2 text-xs">
                 <span class="bg-zinc-800 px-2 py-1 rounded text-zinc-300">
-                  Envío: $3.000
+                  Envío: ${COSTO_ENVIO.toLocaleString("es-AR")}
                 </span>
                 <span class="text-red-400">· Retiro gratis</span>
               </div>
@@ -139,16 +141,18 @@ console.log("Productos cargados en Astro:", products?.length);
                 Métodos de pago
               </h3>
 
-              <div class="flex flex-wrap gap-2">
-                <span class="bg-zinc-800 px-3 py-1 rounded-full text-xs text-zinc-300">
-                  💵 Efectivo
-                </span>
-                <span class="bg-zinc-800 px-3 py-1 rounded-full text-xs text-zinc-300">
-                  💳 Tarjetas
-                </span>
+              <div class="flex flex-wrap gap-2 mb-3">
                 <span class="bg-zinc-800 px-3 py-1 rounded-full text-xs text-zinc-300">
                   🟢 Transferencia
                 </span>
+                <span class="bg-zinc-800 px-3 py-1 rounded-full text-xs text-zinc-300">
+                  💵 Efectivo
+                </span>
+              </div>
+
+              <div class="bg-zinc-900 border border-zinc-700 rounded-lg p-2 mt-2">
+                <p class="text-xs text-zinc-400 mb-1">Alias CBU:</p>
+                <p class="text-sm font-mono text-green-400 font-semibold">{ALIAS_TRANSFERENCIA}</p>
               </div>
             </div>
 
@@ -202,7 +206,6 @@ console.log("Productos cargados en Astro:", products?.length);
                 loading="lazy"
                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%2327272a' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%2352525b' font-family='sans-serif' font-size='14'%3ECargando...%3C/text%3E%3C/svg%3E"
               />
-              {/* Badge Popular / Nuevo */}
               {product.badge && (
                 <span
                   class={`absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-bold shadow-lg ${
@@ -341,7 +344,160 @@ console.log("Productos cargados en Astro:", products?.length);
                 d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
               ></path>
             </svg>
-            Pedir por WhatsApp
+            Continuar con el pedido
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL DE MÉTODO DE PAGO Y COMPROBANTE -->
+    <div
+      id="payment-modal"
+      class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] hidden items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-md w-full shadow-2xl animate-slide-up overflow-hidden">
+        <!-- Header -->
+        <div class="flex items-center justify-between p-6 border-b border-zinc-800">
+          <h2 class="text-xl font-semibold text-zinc-50">
+            Confirmar pedido
+          </h2>
+          <button
+            id="btn-close-payment"
+            class="text-zinc-400 hover:text-zinc-200 transition"
+            type="button"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Contenido -->
+        <div class="p-6 overflow-y-auto max-h-[70vh]">
+          <!-- Método de pago -->
+          <div class="mb-6">
+            <h3 class="text-sm font-semibold text-zinc-100 mb-3">
+              ¿Cómo vas a pagar?
+            </h3>
+            <div class="flex flex-col gap-2">
+              <label class="payment-option flex items-center justify-between bg-zinc-800 rounded-xl px-4 py-3 cursor-pointer hover:bg-zinc-700 transition border-2 border-transparent">
+                <div class="flex items-center gap-3">
+                  <input
+                    type="radio"
+                    name="payment-method"
+                    class="payment-radio w-5 h-5"
+                    value="transferencia"
+                    checked
+                  />
+                  <div>
+                    <span class="text-sm font-medium text-zinc-100">🟢 Transferencia</span>
+                    <span class="text-xs text-zinc-400 block">Enviá el comprobante por WhatsApp</span>
+                  </div>
+                </div>
+              </label>
+
+              <label class="payment-option flex items-center justify-between bg-zinc-800 rounded-xl px-4 py-3 cursor-pointer hover:bg-zinc-700 transition border-2 border-transparent">
+                <div class="flex items-center gap-3">
+                  <input
+                    type="radio"
+                    name="payment-method"
+                    class="payment-radio w-5 h-5"
+                    value="efectivo"
+                  />
+                  <div>
+                    <span class="text-sm font-medium text-zinc-100">💵 Efectivo</span>
+                    <span class="text-xs text-zinc-400 block">Pagás al recibir</span>
+                  </div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Datos de transferencia (solo si es transferencia) -->
+          <div id="transfer-info" class="mb-6">
+            <div class="bg-zinc-950 border border-green-500/30 rounded-xl p-4">
+              <h4 class="text-sm font-semibold text-green-400 mb-3 flex items-center gap-2">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                </svg>
+                Datos para transferir
+              </h4>
+              <div class="space-y-2">
+                <div class="flex justify-between items-center">
+                  <span class="text-xs text-zinc-400">Alias CBU:</span>
+                  <div class="flex items-center gap-2">
+                    <span class="text-sm font-mono text-green-400 font-bold">{ALIAS_TRANSFERENCIA}</span>
+                    <button
+                      id="btn-copy-alias"
+                      class="text-zinc-400 hover:text-green-400 transition"
+                      type="button"
+                      title="Copiar alias"
+                    >
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-xs text-zinc-400">Monto:</span>
+                  <span id="payment-total" class="text-lg font-bold text-green-400">$0</span>
+                </div>
+              </div>
+              <div class="mt-3 bg-zinc-900 rounded-lg p-3">
+                <p class="text-xs text-zinc-300">
+                  ⚠️ <strong>Importante:</strong> Después de transferir, adjuntá el comprobante en el chat de WhatsApp.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Instrucciones de efectivo (solo si es efectivo) -->
+          <div id="cash-info" class="mb-6 hidden">
+            <div class="bg-zinc-950 border border-zinc-700 rounded-xl p-4">
+              <h4 class="text-sm font-semibold text-zinc-100 mb-2 flex items-center gap-2">
+                💵 Pago en efectivo
+              </h4>
+              <p class="text-xs text-zinc-300">
+                Pagás al momento de recibir tu pedido. Tené el monto exacto o lo más aproximado posible.
+              </p>
+              <div class="mt-3 bg-zinc-900 rounded-lg p-3">
+                <div class="flex justify-between items-center">
+                  <span class="text-xs text-zinc-400">Total a pagar:</span>
+                  <span id="cash-total" class="text-lg font-bold text-red-400">$0</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dirección de entrega -->
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-zinc-300 mb-2">
+              📍 Dirección de entrega:
+            </label>
+            <textarea
+              id="delivery-address"
+              class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-200 focus:outline-none focus:ring-2 focus:ring-red-600"
+              rows="2"
+              placeholder="Calle, número, piso/depto, referencias..."
+              required
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="p-6 border-t border-zinc-800">
+          <button
+            id="btn-send-order"
+            class="w-full rounded-full bg-green-600 hover:bg-green-500 px-6 py-3 text-sm font-semibold text-white transition flex items-center justify-center gap-2 active:scale-95"
+            type="button"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path>
+            </svg>
+            Enviar pedido por WhatsApp
           </button>
         </div>
       </div>
@@ -357,7 +513,6 @@ console.log("Productos cargados en Astro:", products?.length);
       <div
         class="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-md w-full max-h-[95vh] overflow-hidden shadow-2xl flex flex-col"
       >
-        <!-- Header del modal - FIJO -->
         <div class="flex items-center justify-between p-4 sm:p-6 border-b border-zinc-800 flex-shrink-0">
           <h2 class="text-lg sm:text-xl font-semibold text-zinc-50">
             Personalizar producto
@@ -367,27 +522,14 @@ console.log("Productos cargados en Astro:", products?.length);
             class="text-zinc-400 hover:text-zinc-200 transition"
             type="button"
           >
-            <svg
-              class="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
             </svg>
           </button>
         </div>
 
-        <!-- Contenido con scroll -->
         <div class="p-4 sm:p-6 overflow-y-auto flex-1">
           <div id="customize-content">
-            <!-- SELECTOR DE TAMAÑO (CANTIDAD DE CARNE) -->
             <div class="mb-6">
               <h3 class="text-sm font-semibold text-zinc-100 mb-2">
                 ¿Cuántas carnes querés? 🍔
@@ -396,18 +538,9 @@ console.log("Productos cargados en Astro:", products?.length);
                 Elegí el tamaño de tu hamburguesa:
               </p>
               <div class="flex flex-col gap-2">
-                <label
-                  class="size-option flex items-center justify-between bg-zinc-800 rounded-xl px-4 py-3 cursor-pointer hover:bg-zinc-700 transition border-2 border-transparent"
-                >
+                <label class="size-option flex items-center justify-between bg-zinc-800 rounded-xl px-4 py-3 cursor-pointer hover:bg-zinc-700 transition border-2 border-transparent">
                   <div class="flex items-center gap-3">
-                    <input
-                      type="radio"
-                      name="burger-size"
-                      class="size-radio w-5 h-5"
-                      value="simple"
-                      data-price="10900"
-                      checked
-                    />
+                    <input type="radio" name="burger-size" class="size-radio w-5 h-5" value="simple" data-price="10900" checked />
                     <div>
                       <span class="text-sm font-medium text-zinc-100">Simple</span>
                       <span class="text-xs text-zinc-400 block">1 carne</span>
@@ -416,17 +549,9 @@ console.log("Productos cargados en Astro:", products?.length);
                   <span class="text-sm font-bold text-red-400">$10.900</span>
                 </label>
 
-                <label
-                  class="size-option flex items-center justify-between bg-zinc-800 rounded-xl px-4 py-3 cursor-pointer hover:bg-zinc-700 transition border-2 border-transparent"
-                >
+                <label class="size-option flex items-center justify-between bg-zinc-800 rounded-xl px-4 py-3 cursor-pointer hover:bg-zinc-700 transition border-2 border-transparent">
                   <div class="flex items-center gap-3">
-                    <input
-                      type="radio"
-                      name="burger-size"
-                      class="size-radio w-5 h-5"
-                      value="doble"
-                      data-price="12900"
-                    />
+                    <input type="radio" name="burger-size" class="size-radio w-5 h-5" value="doble" data-price="12900" />
                     <div>
                       <span class="text-sm font-medium text-zinc-100">Doble</span>
                       <span class="text-xs text-zinc-400 block">2 carnes</span>
@@ -435,17 +560,9 @@ console.log("Productos cargados en Astro:", products?.length);
                   <span class="text-sm font-bold text-red-400">$12.900</span>
                 </label>
 
-                <label
-                  class="size-option flex items-center justify-between bg-zinc-800 rounded-xl px-4 py-3 cursor-pointer hover:bg-zinc-700 transition border-2 border-transparent"
-                >
+                <label class="size-option flex items-center justify-between bg-zinc-800 rounded-xl px-4 py-3 cursor-pointer hover:bg-zinc-700 transition border-2 border-transparent">
                   <div class="flex items-center gap-3">
-                    <input
-                      type="radio"
-                      name="burger-size"
-                      class="size-radio w-5 h-5"
-                      value="triple"
-                      data-price="14900"
-                    />
+                    <input type="radio" name="burger-size" class="size-radio w-5 h-5" value="triple" data-price="14900" />
                     <div>
                       <span class="text-sm font-medium text-zinc-100">Triple</span>
                       <span class="text-xs text-zinc-400 block">3 carnes</span>
@@ -456,12 +573,8 @@ console.log("Productos cargados en Astro:", products?.length);
               </div>
             </div>
 
-            <!-- Quitar ingredientes (DINÁMICO) -->
-            <div id="remove-ingredients-section" class="mb-6">
-              <!-- Se genera dinámicamente -->
-            </div>
+            <div id="remove-ingredients-section" class="mb-6"></div>
 
-            <!-- Extras -->
             <div class="mb-6">
               <h3 class="text-sm font-semibold text-zinc-100 mb-2">
                 Extras (se suman al precio):
@@ -470,43 +583,21 @@ console.log("Productos cargados en Astro:", products?.length);
                 Elegí si querés agregar algo extra a tu pedido. El importe se suma al precio base.
               </p>
               <div class="flex flex-wrap gap-2 text-xs text-zinc-200">
-                <label
-                  class="inline-flex items-center gap-2 bg-zinc-800 rounded-full px-4 py-2.5 cursor-pointer hover:bg-zinc-700 transition active:bg-zinc-600"
-                >
-                  <input
-                    type="checkbox"
-                    class="opt-extra w-4 h-4 rounded border-zinc-600 text-red-600 focus:ring-red-600 focus:ring-offset-0"
-                    data-extra="3000"
-                    value="extra queso"
-                  />
+                <label class="inline-flex items-center gap-2 bg-zinc-800 rounded-full px-4 py-2.5 cursor-pointer hover:bg-zinc-700 transition active:bg-zinc-600">
+                  <input type="checkbox" class="opt-extra w-4 h-4 rounded border-zinc-600 text-red-600 focus:ring-red-600 focus:ring-offset-0" data-extra="3000" value="extra queso" />
                   <span>Extra queso (+$3.000)</span>
                 </label>
-                <label
-                  class="inline-flex items-center gap-2 bg-zinc-800 rounded-full px-4 py-2.5 cursor-pointer hover:bg-zinc-700 transition active:bg-zinc-600"
-                >
-                  <input
-                    type="checkbox"
-                    class="opt-extra w-4 h-4 rounded border-zinc-600 text-red-600 focus:ring-red-600 focus:ring-offset-0"
-                    data-extra="3000"
-                    value="extra bacon"
-                  />
+                <label class="inline-flex items-center gap-2 bg-zinc-800 rounded-full px-4 py-2.5 cursor-pointer hover:bg-zinc-700 transition active:bg-zinc-600">
+                  <input type="checkbox" class="opt-extra w-4 h-4 rounded border-zinc-600 text-red-600 focus:ring-red-600 focus:ring-offset-0" data-extra="3000" value="extra bacon" />
                   <span>Extra bacon (+$3.000)</span>
                 </label>
-                <label
-                  class="inline-flex items-center gap-2 bg-zinc-800 rounded-full px-4 py-2.5 cursor-pointer hover:bg-zinc-700 transition active:bg-zinc-600"
-                >
-                  <input
-                    type="checkbox"
-                    class="opt-extra w-4 h-4 rounded border-zinc-600 text-red-600 focus:ring-red-600 focus:ring-offset-0"
-                    data-extra="3000"
-                    value="carne extra"
-                  />
+                <label class="inline-flex items-center gap-2 bg-zinc-800 rounded-full px-4 py-2.5 cursor-pointer hover:bg-zinc-700 transition active:bg-zinc-600">
+                  <input type="checkbox" class="opt-extra w-4 h-4 rounded border-zinc-600 text-red-600 focus:ring-red-600 focus:ring-offset-0" data-extra="3000" value="carne extra" />
                   <span>Carne extra (+$3.000)</span>
                 </label>
               </div>
             </div>
 
-            <!-- Notas libres -->
             <div class="mb-4">
               <label class="block text-sm font-medium text-zinc-300 mb-2">
                 Notas especiales:
@@ -521,7 +612,6 @@ console.log("Productos cargados en Astro:", products?.length);
           </div>
         </div>
 
-        <!-- Footer con botón - FIJO -->
         <div class="p-4 sm:p-6 border-t border-zinc-800 flex-shrink-0">
           <button
             id="btn-add-customized"
@@ -534,7 +624,7 @@ console.log("Productos cargados en Astro:", products?.length);
       </div>
     </div>
 
-    <!-- MODAL DE CONFIRMACIÓN ANTES DE AGREGAR -->
+    <!-- MODAL DE CONFIRMACIÓN -->
     <div
       id="confirm-add-modal"
       class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4"
@@ -547,8 +637,7 @@ console.log("Productos cargados en Astro:", products?.length);
             ¿Querés personalizar tu pedido antes de agregarlo?
           </h2>
           <p class="text-sm text-zinc-300 mb-6">
-            Podés elegir el tamaño (simple, doble o triple), sacar ingredientes o sumar extras como queso,
-            bacon o carne extra.
+            Podés elegir el tamaño (simple, doble o triple), sacar ingredientes o sumar extras como queso, bacon o carne extra.
           </p>
           <div class="flex flex-col sm:flex-row justify-end gap-3">
             <button
@@ -571,76 +660,37 @@ console.log("Productos cargados en Astro:", products?.length);
     </div>
   </main>
 
-  <!-- Animaciones simples usadas en la UI -->
   <style>
-
     html, body {
       margin: 0;
       min-height: 100svh;
     }
 
-    
-    
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(6px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes slideUp {
-      from {
-        transform: translateY(12px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
+      from { transform: translateY(12px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     @keyframes pulse {
-      0%,
-      100% {
-        opacity: 1;
-      }
-      50% {
-        opacity: 0.5;
-      }
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
     }
 
-    .animate-slide-up {
-      animation: slideUp 0.25s ease-out;
-    }
+    .animate-slide-up { animation: slideUp 0.25s ease-out; }
+    .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+    .product-image { transition: opacity 0.5s ease-in-out; }
+    .product-image.loaded { opacity: 1 !important; }
 
-    .animate-pulse {
-      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    }
-
-    /* Transición suave para imágenes cuando se cargan */
-    .product-image {
-      transition: opacity 0.5s ease-in-out;
-    }
-
-    .product-image.loaded {
-      opacity: 1 !important;
-    }
-
-    /* Prevenir zoom en iOS en inputs */
-    input[type="checkbox"],
-    input[type="radio"],
-    input[type="text"],
-    textarea,
-    button {
+    input[type="checkbox"], input[type="radio"], input[type="text"], textarea, button {
       touch-action: manipulation;
     }
 
-    /* Estilos para radio buttons personalizados */
-    input[type="radio"].size-radio {
+    input[type="radio"].size-radio, input[type="radio"].payment-radio {
       appearance: none;
       -webkit-appearance: none;
       width: 1.25rem;
@@ -654,12 +704,12 @@ console.log("Productos cargados en Astro:", products?.length);
       transition: all 0.2s;
     }
 
-    input[type="radio"].size-radio:checked {
+    input[type="radio"].size-radio:checked, input[type="radio"].payment-radio:checked {
       background-color: #dc2626;
       border-color: #dc2626;
     }
 
-    input[type="radio"].size-radio:checked::after {
+    input[type="radio"].size-radio:checked::after, input[type="radio"].payment-radio:checked::after {
       content: "";
       position: absolute;
       top: 50%;
@@ -671,15 +721,12 @@ console.log("Productos cargados en Astro:", products?.length);
       border-radius: 50%;
     }
 
-    /* Highlight del label cuando está seleccionado */
-    .size-option:has(input:checked) {
+    .size-option:has(input:checked), .payment-option:has(input:checked) {
       border-color: #dc2626 !important;
       background-color: #3f1d1d !important;
     }
 
-    /* Estilos para checkboxes visibles en móviles */
-    input[type="checkbox"].opt-remove,
-    input[type="checkbox"].opt-extra {
+    input[type="checkbox"].opt-remove, input[type="checkbox"].opt-extra {
       appearance: none;
       -webkit-appearance: none;
       width: 1rem;
@@ -693,14 +740,12 @@ console.log("Productos cargados en Astro:", products?.length);
       transition: all 0.2s;
     }
 
-    input[type="checkbox"].opt-remove:checked,
-    input[type="checkbox"].opt-extra:checked {
+    input[type="checkbox"].opt-remove:checked, input[type="checkbox"].opt-extra:checked {
       background-color: #dc2626;
       border-color: #dc2626;
     }
 
-    input[type="checkbox"].opt-remove:checked::after,
-    input[type="checkbox"].opt-extra:checked::after {
+    input[type="checkbox"].opt-remove:checked::after, input[type="checkbox"].opt-extra:checked::after {
       content: "✓";
       position: absolute;
       top: 50%;
@@ -711,15 +756,14 @@ console.log("Productos cargados en Astro:", products?.length);
       font-weight: bold;
     }
 
-    /* Mejorar visibilidad de modales en móviles */
     @media (max-width: 640px) {
       #confirm-add-modal .bg-zinc-900,
       #customize-modal .bg-zinc-900,
-      #cart-modal .bg-zinc-900 {
+      #cart-modal .bg-zinc-900,
+      #payment-modal .bg-zinc-900 {
         max-height: 90vh;
       }
 
-      /* Aumentar el área táctil de los labels */
       label {
         min-height: 44px;
         display: inline-flex;
@@ -728,18 +772,19 @@ console.log("Productos cargados en Astro:", products?.length);
     }
   </style>
 
-  <!-- LÓGICA DEL CARRITO -->
-  <script>
+  <script define:vars={{ 
+    WHATSAPP_NUMBER, 
+    ALIAS_TRANSFERENCIA,
+    HORA_ENTREGA_ESTIMADA 
+  }}>
     document.addEventListener("DOMContentLoaded", () => {
-      // ============ LAZY LOADING MEJORADO CON INTERSECTION OBSERVER ============
+      // ============ LAZY LOADING ============
       const imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const img = entry.target;
             const src = img.dataset.src;
-            
             if (src) {
-              // Crear imagen temporal para pre-cargar
               const tempImg = new Image();
               tempImg.onload = () => {
                 img.src = src;
@@ -748,20 +793,18 @@ console.log("Productos cargados en Astro:", products?.length);
               };
               tempImg.onerror = () => {
                 console.warn('Error cargando imagen:', src);
-                img.classList.add('loaded'); // Mostrar placeholder aunque falle
+                img.classList.add('loaded');
               };
               tempImg.src = src;
-              
               observer.unobserve(img);
             }
           }
         });
       }, {
-        rootMargin: '50px', // Cargar 50px antes de que sea visible
+        rootMargin: '50px',
         threshold: 0.01
       });
 
-      // Aplicar lazy loading a todas las imágenes de productos
       document.querySelectorAll('.product-image').forEach(img => {
         imageObserver.observe(img);
       });
@@ -772,11 +815,8 @@ console.log("Productos cargados en Astro:", products?.length);
         const currentHour = now.getHours();
         const currentMinutes = now.getMinutes();
         const currentTime = currentHour + currentMinutes / 60;
-        
-        // Horario: 19:00 - 00:00 (7 PM - 12 AM)
         const openTime = 19;
         const closeTime = 24;
-        
         const isOpen = currentTime >= openTime && currentTime < closeTime;
         
         const statusBanner = document.getElementById('status-banner');
@@ -799,37 +839,25 @@ console.log("Productos cargados en Astro:", products?.length);
             if (deliveryTime) deliveryTime.style.display = 'none';
           }
         }
-        
         return isOpen;
       }
       
-      // Ejecutar verificación inicial
       const businessIsOpen = checkBusinessStatus();
-      
-      // Actualizar cada minuto
       setInterval(checkBusinessStatus, 60000);
 
       // ============ PERSISTENCIA DEL CARRITO ============
       const CART_STORAGE_KEY = 'bennys-cart';
       const CART_EXPIRY_KEY = 'bennys-cart-expiry';
-      const CART_EXPIRY_HOURS = 24; // El carrito expira después de 24 horas
+      const CART_EXPIRY_HOURS = 24;
 
       function saveCart(cartData) {
         try {
           const now = new Date().getTime();
           const expiryTime = now + (CART_EXPIRY_HOURS * 60 * 60 * 1000);
-          
           localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartData));
           localStorage.setItem(CART_EXPIRY_KEY, expiryTime.toString());
-          
-          console.log('💾 Carrito guardado:', cartData.length, 'items');
         } catch (error) {
           console.warn('⚠️ Error al guardar el carrito:', error);
-          // Si hay error de espacio, limpiar y reintentar
-          if (error.name === 'QuotaExceededError') {
-            clearCart();
-            showNotification('⚠️ Límite de almacenamiento alcanzado');
-          }
         }
       }
 
@@ -837,26 +865,18 @@ console.log("Productos cargados en Astro:", products?.length);
         try {
           const expiryTime = localStorage.getItem(CART_EXPIRY_KEY);
           const now = new Date().getTime();
-          
-          // Verificar si el carrito ha expirado
           if (expiryTime && now > parseInt(expiryTime)) {
-            console.log('⏰ Carrito expirado, limpiando...');
             clearCart();
             return [];
           }
-          
           const savedCart = localStorage.getItem(CART_STORAGE_KEY);
           if (savedCart) {
             const parsedCart = JSON.parse(savedCart);
-            console.log('📦 Carrito cargado:', parsedCart.length, 'items');
-            
-            // Mostrar notificación si hay items
             if (parsedCart.length > 0) {
               setTimeout(() => {
                 showNotification(`🛒 Tienes ${parsedCart.length} ${parsedCart.length === 1 ? 'producto' : 'productos'} en tu carrito`);
               }, 500);
             }
-            
             return parsedCart;
           }
         } catch (error) {
@@ -869,19 +889,14 @@ console.log("Productos cargados en Astro:", products?.length);
       function clearCart() {
         localStorage.removeItem(CART_STORAGE_KEY);
         localStorage.removeItem(CART_EXPIRY_KEY);
-        console.log('🗑️ Carrito limpiado');
       }
 
       // ============ DATOS DEL CARRITO ============
-      let cart = loadCart(); // Cargar desde localStorage
+      let cart = loadCart();
       let currentCustomizingProduct = null;
       let pendingProductId = null;
       let editingCartIndex = null;
 
-      // NÚMERO DE WHATSAPP
-      const WHATSAPP_NUMBER = "3572548014";
-
-      // Elementos del DOM
       const btnOpenCart = document.getElementById("btn-open-cart");
       const btnCloseCart = document.getElementById("btn-close-cart");
       const cartModal = document.getElementById("cart-modal");
@@ -900,120 +915,109 @@ console.log("Productos cargados en Astro:", products?.length);
       const btnConfirmNo = document.getElementById("btn-confirm-no");
       const btnConfirmYes = document.getElementById("btn-confirm-yes");
 
+      const paymentModal = document.getElementById("payment-modal");
+      const btnClosePayment = document.getElementById("btn-close-payment");
+      const btnSendOrder = document.getElementById("btn-send-order");
+      const btnCopyAlias = document.getElementById("btn-copy-alias");
+
       const extraOptions = document.querySelectorAll(".opt-extra");
       const sizeRadios = document.querySelectorAll(".size-radio");
 
-      // SERIALIZAR PRODUCTOS DESDE EL DOM
-      const productsData = Array.from(document.querySelectorAll(".product-card")).map(
-        (card) => {
-          const id = card.dataset.id;
-          const name = card.querySelector(".product-name")?.textContent?.trim() || "";
-          const image = card.querySelector(".product-image")?.getAttribute("data-src") || "";
-          const description =
-            card.querySelector(".product-description")?.textContent?.trim() || "";
-          const category = card.dataset.category || "todos";
-          const priceElement = card.querySelector(".product-price");
-          const priceText = priceElement?.textContent?.trim() || "";
-          // Extraer el precio numérico para bebidas y postres
-          const price = priceText.startsWith("$") 
-            ? parseFloat(priceText.replace(/\$|\.|\,/g, "")) 
-            : null;
-          
-          // Obtener ingredientes del data-attribute
-          const ingredientsStr = card.dataset.ingredients || "[]";
-          let ingredients = [];
-          try {
-            ingredients = JSON.parse(ingredientsStr);
-          } catch (e) {
-            console.warn("Error parsing ingredients for product", id, e);
-          }
-          
-          return { id, name, image, description, category, price, ingredients };
+      const productsData = Array.from(document.querySelectorAll(".product-card")).map((card) => {
+        const id = card.dataset.id;
+        const name = card.querySelector(".product-name")?.textContent?.trim() || "";
+        const image = card.querySelector(".product-image")?.getAttribute("data-src") || "";
+        const description = card.querySelector(".product-description")?.textContent?.trim() || "";
+        const category = card.dataset.category || "todos";
+        const priceElement = card.querySelector(".product-price");
+        const priceText = priceElement?.textContent?.trim() || "";
+        const price = priceText.startsWith("$") ? parseFloat(priceText.replace(/\$|\.|\,/g, "")) : null;
+        const ingredientsStr = card.dataset.ingredients || "[]";
+        let ingredients = [];
+        try {
+          ingredients = JSON.parse(ingredientsStr);
+        } catch (e) {
+          console.warn("Error parsing ingredients for product", id, e);
         }
-      );
+        return { id, name, image, description, category, price, ingredients };
+      });
 
-      // ============ FUNCIÓN PARA GENERAR OPCIONES DINÁMICAS DE INGREDIENTES ============
+      // ============ MANEJO DEL MODAL DE PAGO ============
+      const paymentRadios = document.querySelectorAll('input[name="payment-method"]');
+      const transferInfo = document.getElementById('transfer-info');
+      const cashInfo = document.getElementById('cash-info');
+      const paymentTotal = document.getElementById('payment-total');
+      const cashTotal = document.getElementById('cash-total');
+
+      paymentRadios.forEach(radio => {
+        radio.addEventListener('change', () => {
+          if (radio.value === 'transferencia') {
+            transferInfo.classList.remove('hidden');
+            cashInfo.classList.add('hidden');
+          } else {
+            transferInfo.classList.add('hidden');
+            cashInfo.classList.remove('hidden');
+          }
+        });
+      });
+
+      btnCopyAlias?.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(ALIAS_TRANSFERENCIA);
+          showNotification('✅ Alias copiado al portapapeles');
+        } catch (error) {
+          showNotification('⚠️ No se pudo copiar el alias');
+        }
+      });
+
+      // ============ INGREDIENTES DINÁMICOS ============
       function renderRemoveIngredientsOptions(ingredients) {
         const section = document.getElementById('remove-ingredients-section');
-        
         if (!ingredients || ingredients.length === 0) {
           section.innerHTML = '';
           return;
         }
-
         const html = `
-          <h3 class="text-sm font-semibold text-zinc-100 mb-2">
-            ¿Querés sacar algo?
-          </h3>
-          <p class="text-xs text-zinc-400 mb-3">
-            Tildá lo que NO querés que lleve tu pedido:
-          </p>
+          <h3 class="text-sm font-semibold text-zinc-100 mb-2">¿Querés sacar algo?</h3>
+          <p class="text-xs text-zinc-400 mb-3">Tildá lo que NO querés que lleve tu pedido:</p>
           <div class="flex flex-wrap gap-2 text-xs text-zinc-200">
             ${ingredients.map(ingredient => `
               <label class="inline-flex items-center gap-2 bg-zinc-800 rounded-full px-4 py-2.5 cursor-pointer hover:bg-zinc-700 transition active:bg-zinc-600">
-                <input
-                  type="checkbox"
-                  class="opt-remove w-4 h-4 rounded border-zinc-600 text-red-600 focus:ring-red-600 focus:ring-offset-0"
-                  value="sin ${ingredient.toLowerCase()}"
-                />
+                <input type="checkbox" class="opt-remove w-4 h-4 rounded border-zinc-600 text-red-600 focus:ring-red-600 focus:ring-offset-0" value="sin ${ingredient.toLowerCase()}" />
                 <span>Sin ${ingredient}</span>
               </label>
             `).join('')}
           </div>
         `;
-        
         section.innerHTML = html;
       }
 
       // ============ FUNCIONES DE CARRITO ============
-
       function addToCart(productId, options = {}) {
-        // Verificar si el negocio está abierto antes de agregar
         if (!checkBusinessStatus()) {
           showNotification("⚠️ Lo sentimos, estamos cerrados. Horario: 19:00 - 00:00");
           return;
         }
 
         const product = productsData.find((p) => p.id === String(productId));
-        if (!product) {
-          console.warn("Producto no encontrado:", productId);
-          return;
-        }
+        if (!product) return;
 
-        // Si es bebida o postre, usar precio fijo
         if (product.category === "bebidas" || product.category === "postres") {
-          cart.push({
-            ...product,
-            price: product.price,
-            quantity: 1,
-            notes: "",
-          });
+          cart.push({ ...product, price: product.price, quantity: 1, notes: "" });
           updateCart();
           showNotification(`✅ "${product.name}" agregado al carrito`);
           return;
         }
 
-        // Para hamburguesas, usar el sistema de tamaños
         const size = options.size || "simple";
         const basePrice = options.basePrice || 10900;
         const notes = options.notes || "";
         const extraAmount = options.extraAmount || 0;
         const finalPrice = basePrice + extraAmount;
-
         const sizeName = size === "simple" ? "Simple" : size === "doble" ? "Doble" : "Triple";
         const fullName = `${product.name} ${sizeName}`;
 
-        cart.push({
-          ...product,
-          name: fullName,
-          size,
-          price: finalPrice,
-          basePrice,
-          extraAmount,
-          quantity: 1,
-          notes,
-        });
-
+        cart.push({ ...product, name: fullName, size, price: finalPrice, basePrice, extraAmount, quantity: 1, notes });
         updateCart();
         showNotification(`✅ "${fullName}" agregado al carrito`);
       }
@@ -1039,126 +1043,63 @@ console.log("Productos cargados en Astro:", products?.length);
       }
 
       function updateCart() {
-        // Guardar en localStorage cada vez que se actualiza
         saveCart(cart);
-
         const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
         cartCount.textContent = totalItems;
 
         if (cart.length === 0) {
-          cartItems.innerHTML = `<p class="text-zinc-400 text-sm text-center py-8">
-            Tu carrito está vacío
-          </p>`;
+          cartItems.innerHTML = `<p class="text-zinc-400 text-sm text-center py-8">Tu carrito está vacío</p>`;
           btnWhatsApp.disabled = true;
           btnClearCart.disabled = true;
         } else {
-          cartItems.innerHTML = cart
-            .map(
-              (item, index) => {
-                const isBeverageOrDessert = item.category === "bebidas" || item.category === "postres";
-                return `
-          <div class="flex gap-3 mb-4 pb-4 border-b border-zinc-800 last:border-0">
-            <img
-              src="${item.image}"
-              alt="${item.name}"
-              class="w-16 h-16 rounded-lg object-cover bg-zinc-800"
-              loading="lazy"
-            />
-            <div class="flex-1">
-              <div class="flex items-start justify-between">
-                <h3 class="text-sm font-medium text-zinc-50">${item.name}</h3>
-                <p class="text-xs text-zinc-400">$${item.price.toLocaleString("es-AR")}</p>
-              </div>
-              ${
-                item.notes
-                  ? `<p class="text-xs text-red-400 italic mt-1">${item.notes}</p>`
-                  : ""
-              }
-              <div class="flex items-center gap-2 mt-2">
-                <button
-                  class="btn-decrease w-6 h-6 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-sm transition"
-                  data-index="${index}"
-                  aria-label="Disminuir cantidad"
-                >
-                  −
-                </button>
-                <span class="text-sm text-zinc-300 min-w-[20px] text-center">${item.quantity}</span>
-                <button
-                  class="btn-increase w-6 h-6 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-sm transition"
-                  data-index="${index}"
-                  aria-label="Aumentar cantidad"
-                >
-                  +
-                </button>
-
-                <div class="ml-auto flex flex-col items-end gap-1">
-                  ${!isBeverageOrDessert ? `
-                    <button
-                      class="btn-edit text-xs text-red-400 hover:text-red-300 transition"
-                      data-index="${index}"
-                      aria-label="Volver a personalizar este producto"
-                    >
-                      Personalizar
-                    </button>
-                  ` : ''}
-
-                  <button
-                    class="btn-remove text-xs text-red-400 hover:text-red-300 transition"
-                    data-index="${index}"
-                    aria-label="Eliminar del carrito"
-                  >
-                    Eliminar
-                  </button>
+          cartItems.innerHTML = cart.map((item, index) => {
+            const isBeverageOrDessert = item.category === "bebidas" || item.category === "postres";
+            return `
+              <div class="flex gap-3 mb-4 pb-4 border-b border-zinc-800 last:border-0">
+                <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-lg object-cover bg-zinc-800" loading="lazy" />
+                <div class="flex-1">
+                  <div class="flex items-start justify-between">
+                    <h3 class="text-sm font-medium text-zinc-50">${item.name}</h3>
+                    <p class="text-xs text-zinc-400">$${item.price.toLocaleString("es-AR")}</p>
+                  </div>
+                  ${item.notes ? `<p class="text-xs text-red-400 italic mt-1">${item.notes}</p>` : ""}
+                  <div class="flex items-center gap-2 mt-2">
+                    <button class="btn-decrease w-6 h-6 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-sm transition" data-index="${index}">−</button>
+                    <span class="text-sm text-zinc-300 min-w-[20px] text-center">${item.quantity}</span>
+                    <button class="btn-increase w-6 h-6 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-sm transition" data-index="${index}">+</button>
+                    <div class="ml-auto flex flex-col items-end gap-1">
+                      ${!isBeverageOrDessert ? `<button class="btn-edit text-xs text-red-400 hover:text-red-300 transition" data-index="${index}">Personalizar</button>` : ''}
+                      <button class="btn-remove text-xs text-red-400 hover:text-red-300 transition" data-index="${index}">Eliminar</button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>`;
-              }
-            )
-            .join("");
+              </div>`;
+          }).join("");
 
           document.querySelectorAll(".btn-decrease").forEach((btn) => {
-            btn.addEventListener("click", () =>
-              updateQuantity(parseInt(btn.dataset.index), -1)
-            );
+            btn.addEventListener("click", () => updateQuantity(parseInt(btn.dataset.index), -1));
           });
           document.querySelectorAll(".btn-increase").forEach((btn) => {
-            btn.addEventListener("click", () =>
-              updateQuantity(parseInt(btn.dataset.index), 1)
-            );
+            btn.addEventListener("click", () => updateQuantity(parseInt(btn.dataset.index), 1));
           });
-
           document.querySelectorAll(".btn-remove").forEach((btn) => {
-            btn.addEventListener("click", () =>
-              removeFromCart(parseInt(btn.dataset.index))
-            );
+            btn.addEventListener("click", () => removeFromCart(parseInt(btn.dataset.index)));
           });
-
           document.querySelectorAll(".btn-edit").forEach((btn) => {
             btn.addEventListener("click", () => {
               const index = parseInt(btn.dataset.index);
               const item = cart[index];
               if (!item) return;
-
               editingCartIndex = index;
               currentCustomizingProduct = item.id;
-
-              // Obtener el producto original para cargar sus ingredientes
               const originalProduct = productsData.find((p) => p.id === item.id);
               if (originalProduct && originalProduct.ingredients) {
                 renderRemoveIngredientsOptions(originalProduct.ingredients);
               }
-
-              // Restaurar el tamaño seleccionado
-              sizeRadios.forEach((radio) => {
-                radio.checked = radio.value === item.size;
-              });
-
-              // Limpiar opciones
+              sizeRadios.forEach((radio) => { radio.checked = radio.value === item.size; });
               document.querySelectorAll(".opt-remove").forEach((o) => (o.checked = false));
               extraOptions.forEach((o) => (o.checked = false));
               customNotes.value = item.notes || "";
-
               openModal(customizeModal);
             });
           });
@@ -1170,10 +1111,8 @@ console.log("Productos cargados en Astro:", products?.length);
         cartTotal.textContent = `$${calculateTotal().toLocaleString("es-AR")}`;
       }
 
-      // ============ BOTÓN VACIAR CARRITO ============
       btnClearCart?.addEventListener("click", () => {
         if (cart.length === 0) return;
-        
         if (confirm("¿Estás seguro de que querés vaciar el carrito?")) {
           cart = [];
           updateCart();
@@ -1182,15 +1121,9 @@ console.log("Productos cargados en Astro:", products?.length);
       });
 
       // ============ MODAL HANDLERS ============
-
       function preventScroll(e) {
-        if (
-          e.target.closest("#cart-modal") ||
-          e.target.closest("#customize-modal") ||
-          e.target.closest("#confirm-add-modal")
-        ) {
-          return;
-        }
+        if (e.target.closest("#cart-modal") || e.target.closest("#customize-modal") || 
+            e.target.closest("#confirm-add-modal") || e.target.closest("#payment-modal")) return;
         e.preventDefault();
       }
 
@@ -1211,21 +1144,18 @@ console.log("Productos cargados en Astro:", products?.length);
 
       btnOpenCart?.addEventListener("click", () => openModal(cartModal));
       btnCloseCart?.addEventListener("click", () => closeModal(cartModal));
-      cartModal?.addEventListener("click", (e) => {
-        if (e.target === cartModal) closeModal(cartModal);
-      });
+      cartModal?.addEventListener("click", (e) => { if (e.target === cartModal) closeModal(cartModal); });
 
       btnCloseCustomize?.addEventListener("click", () => {
         closeModal(customizeModal);
         currentCustomizingProduct = null;
         editingCartIndex = null;
         renderRemoveIngredientsOptions([]);
-        sizeRadios.forEach((radio) => {
-          radio.checked = radio.value === "simple";
-        });
+        sizeRadios.forEach((radio) => { radio.checked = radio.value === "simple"; });
         extraOptions.forEach((o) => (o.checked = false));
         customNotes.value = "";
       });
+
       customizeModal?.addEventListener("click", (e) => {
         if (e.target === customizeModal) {
           closeModal(customizeModal);
@@ -1235,33 +1165,26 @@ console.log("Productos cargados en Astro:", products?.length);
         }
       });
 
-      confirmModal?.addEventListener("click", (e) => {
-        if (e.target === confirmModal) closeModal(confirmModal);
-      });
+      confirmModal?.addEventListener("click", (e) => { if (e.target === confirmModal) closeModal(confirmModal); });
+
+      btnClosePayment?.addEventListener("click", () => closeModal(paymentModal));
+      paymentModal?.addEventListener("click", (e) => { if (e.target === paymentModal) closeModal(paymentModal); });
 
       // ============ BOTONES DE PRODUCTOS ============
-
       document.querySelectorAll(".btn-add").forEach((btn) => {
         btn.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
-          
-          // Verificar horario antes de abrir modal
           if (!checkBusinessStatus()) {
             showNotification("⚠️ Lo sentimos, estamos cerrados. Horario: 19:00 - 00:00");
             return;
           }
-          
           const productId = btn.dataset.productId;
           const product = productsData.find((p) => p.id === String(productId));
-          
-          // Si es bebida o postre, agregar directamente sin modal
           if (product && (product.category === "bebidas" || product.category === "postres")) {
             addToCart(productId);
             return;
           }
-          
-          // Para hamburguesas, abrir modal de confirmación
           pendingProductId = productId;
           editingCartIndex = null;
           openModal(confirmModal);
@@ -1272,23 +1195,17 @@ console.log("Productos cargados en Astro:", products?.length);
         btn.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
-          
           const productId = btn.dataset.productId;
           currentCustomizingProduct = productId;
           pendingProductId = null;
           editingCartIndex = null;
-          
-          // Cargar ingredientes del producto
           const product = productsData.find((p) => p.id === String(productId));
           if (product && product.ingredients) {
             renderRemoveIngredientsOptions(product.ingredients);
           } else {
             renderRemoveIngredientsOptions([]);
           }
-          
-          sizeRadios.forEach((radio) => {
-            radio.checked = radio.value === "simple";
-          });
+          sizeRadios.forEach((radio) => { radio.checked = radio.value === "simple"; });
           extraOptions.forEach((o) => (o.checked = false));
           customNotes.value = "";
           openModal(customizeModal);
@@ -1300,13 +1217,7 @@ console.log("Productos cargados en Astro:", products?.length);
           closeModal(confirmModal);
           return;
         }
-        // Agregar hamburguesa simple por defecto
-        addToCart(pendingProductId, {
-          size: "simple",
-          basePrice: 10900,
-          notes: "",
-          extraAmount: 0
-        });
+        addToCart(pendingProductId, { size: "simple", basePrice: 10900, notes: "", extraAmount: 0 });
         pendingProductId = null;
         closeModal(confirmModal);
       });
@@ -1316,21 +1227,15 @@ console.log("Productos cargados en Astro:", products?.length);
           closeModal(confirmModal);
           return;
         }
-        
         currentCustomizingProduct = pendingProductId;
         editingCartIndex = null;
-        
-        // Cargar ingredientes del producto
         const product = productsData.find((p) => p.id === String(pendingProductId));
         if (product && product.ingredients) {
           renderRemoveIngredientsOptions(product.ingredients);
         } else {
           renderRemoveIngredientsOptions([]);
         }
-        
-        sizeRadios.forEach((radio) => {
-          radio.checked = radio.value === "simple";
-        });
+        sizeRadios.forEach((radio) => { radio.checked = radio.value === "simple"; });
         extraOptions.forEach((o) => (o.checked = false));
         customNotes.value = "";
         openModal(customizeModal);
@@ -1340,26 +1245,17 @@ console.log("Productos cargados en Astro:", products?.length);
 
       btnAddCustomized?.addEventListener("click", () => {
         if (!currentCustomizingProduct) return;
-
-        // Obtener el tamaño seleccionado
         const selectedSize = document.querySelector('input[name="burger-size"]:checked');
         if (!selectedSize) {
           showNotification("⚠️ Por favor seleccioná un tamaño");
           return;
         }
-
         const size = selectedSize.value;
         const basePrice = parseInt(selectedSize.dataset.price);
-
         const notesParts = [];
         let extraAmount = 0;
-
-        // Obtener opciones de remover ingredientes (dinámicas)
         const removeOptions = document.querySelectorAll(".opt-remove");
-        removeOptions.forEach((opt) => {
-          if (opt.checked) notesParts.push(opt.value);
-        });
-
+        removeOptions.forEach((opt) => { if (opt.checked) notesParts.push(opt.value); });
         extraOptions.forEach((opt) => {
           if (opt.checked) {
             const extra = parseFloat(opt.dataset.extra || "0");
@@ -1367,21 +1263,13 @@ console.log("Productos cargados en Astro:", products?.length);
             notesParts.push(`${opt.value} (+${extra.toLocaleString("es-AR")})`);
           }
         });
-
-        if (customNotes.value.trim()) {
-          notesParts.push(customNotes.value.trim());
-        }
-
+        if (customNotes.value.trim()) notesParts.push(customNotes.value.trim());
         const notes = notesParts.join(" | ");
 
         if (editingCartIndex !== null) {
-          const product = productsData.find(
-            (p) => p.id === String(currentCustomizingProduct)
-          );
-          if (!product) {
-            console.warn("Producto no encontrado al editar:", currentCustomizingProduct);
-          } else if (!cart[editingCartIndex]) {
-            console.warn("Ítem de carrito no encontrado al editar:", editingCartIndex);
+          const product = productsData.find((p) => p.id === String(currentCustomizingProduct));
+          if (!product || !cart[editingCartIndex]) {
+            console.warn("Error al editar");
           } else {
             const item = cart[editingCartIndex];
             const sizeName = size === "simple" ? "Simple" : size === "doble" ? "Doble" : "Triple";
@@ -1402,15 +1290,75 @@ console.log("Productos cargados en Astro:", products?.length);
         currentCustomizingProduct = null;
         editingCartIndex = null;
         renderRemoveIngredientsOptions([]);
-        sizeRadios.forEach((radio) => {
-          radio.checked = radio.value === "simple";
-        });
+        sizeRadios.forEach((radio) => { radio.checked = radio.value === "simple"; });
         extraOptions.forEach((o) => (o.checked = false));
         customNotes.value = "";
       });
 
-      // ============ FILTROS ============
+      // ============ BOTÓN WHATSAPP ============
+      btnWhatsApp?.addEventListener("click", () => {
+        if (cart.length === 0) return;
+        if (!checkBusinessStatus()) {
+          showNotification("⚠️ Lo sentimos, estamos cerrados. Horario: 19:00 - 00:00");
+          return;
+        }
+        
+        // Actualizar totales en el modal de pago
+        const total = calculateTotal();
+        paymentTotal.textContent = `$${total.toLocaleString("es-AR")}`;
+        cashTotal.textContent = `$${total.toLocaleString("es-AR")}`;
+        
+        // Resetear formulario
+        document.querySelector('input[name="payment-method"][value="transferencia"]').checked = true;
+        transferInfo.classList.remove('hidden');
+        cashInfo.classList.add('hidden');
+        document.getElementById('delivery-address').value = '';
+        
+        closeModal(cartModal);
+        openModal(paymentModal);
+      });
 
+      btnSendOrder?.addEventListener("click", () => {
+        if (cart.length === 0) return;
+        
+        const address = document.getElementById('delivery-address').value.trim();
+        if (!address) {
+          showNotification('⚠️ Por favor ingresá tu dirección de entrega');
+          return;
+        }
+        
+        const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
+        const paymentLabel = paymentMethod === 'transferencia' ? '🟢 Transferencia' : '💵 Efectivo';
+        
+        let mensaje = "¡Hola! Quiero hacer el siguiente pedido:%0A%0A";
+        
+        cart.forEach((item) => {
+          const subtotal = item.price * item.quantity;
+          mensaje += `🍔 ${item.quantity}x ${item.name} - $${subtotal.toLocaleString("es-AR")}%0A`;
+          if (item.notes) {
+            mensaje += `⚠️ ${item.notes}%0A`;
+          }
+        });
+        
+        mensaje += `%0A💰 *Total: $${calculateTotal().toLocaleString("es-AR")}*`;
+        mensaje += `%0A%0A📍 *Dirección:* ${encodeURIComponent(address)}`;
+        mensaje += `%0A💳 *Forma de pago:* ${paymentLabel}`;
+        
+        if (paymentMethod === 'transferencia') {
+          mensaje += `%0A%0A🟢 *Voy a transferir al alias:* ${ALIAS_TRANSFERENCIA}`;
+          mensaje += `%0A_Adjunto el comprobante en el siguiente mensaje_`;
+        } else {
+          mensaje += `%0A%0A💵 *Pago en efectivo al recibir*`;
+        }
+        
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${mensaje}`;
+        window.open(url, "_blank");
+        
+        closeModal(paymentModal);
+        showNotification('✅ Pedido enviado. Te contactaremos por WhatsApp');
+      });
+
+      // ============ FILTROS ============
       let activeFilter = "todos";
       const filterButtons = document.querySelectorAll(".filter-btn");
       const cards = document.querySelectorAll(".product-card");
@@ -1418,12 +1366,9 @@ console.log("Productos cargados en Astro:", products?.length);
 
       function aplicarFiltro() {
         let visibleCount = 0;
-
         cards.forEach((card) => {
           const cardCategory = card.dataset.category;
-          const shouldShow =
-            activeFilter === "todos" || cardCategory === activeFilter;
-
+          const shouldShow = activeFilter === "todos" || cardCategory === activeFilter;
           if (shouldShow) {
             card.classList.remove("hidden");
             card.style.animation = "fadeIn 0.4s ease-out";
@@ -1432,38 +1377,18 @@ console.log("Productos cargados en Astro:", products?.length);
             card.classList.add("hidden");
           }
         });
-
-        if (productsCount) {
-          productsCount.textContent = visibleCount;
-        }
+        if (productsCount) productsCount.textContent = visibleCount;
       }
 
       filterButtons.forEach((btn) => {
         btn.addEventListener("click", () => {
           activeFilter = btn.dataset.filter;
-
           filterButtons.forEach((b) => {
-            b.classList.remove(
-              "bg-red-600",
-              "border-red-600",
-              "text-white",
-              "font-semibold",
-              "shadow",
-              "shadow-red-500/40"
-            );
+            b.classList.remove("bg-red-600", "border-red-600", "text-white", "font-semibold", "shadow", "shadow-red-500/40");
             b.classList.add("bg-zinc-900", "border-zinc-700", "text-zinc-300");
           });
-
           btn.classList.remove("bg-zinc-900", "border-zinc-700", "text-zinc-300");
-          btn.classList.add(
-            "bg-red-600",
-            "border-red-600",
-            "text-white",
-            "font-semibold",
-            "shadow",
-            "shadow-red-500/40"
-          );
-
+          btn.classList.add("bg-red-600", "border-red-600", "text-white", "font-semibold", "shadow", "shadow-red-500/40");
           aplicarFiltro();
         });
       });
@@ -1471,14 +1396,11 @@ console.log("Productos cargados en Astro:", products?.length);
       aplicarFiltro();
 
       // ============ NOTIFICACIONES ============
-
       function showNotification(message) {
         const notification = document.createElement("div");
-        notification.className =
-          "fixed bottom-4 right-4 bg-zinc-800 border border-zinc-700 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-slide-up max-w-[90vw]";
+        notification.className = "fixed bottom-4 right-4 bg-zinc-800 border border-zinc-700 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-slide-up max-w-[90vw]";
         notification.textContent = message;
         document.body.appendChild(notification);
-
         setTimeout(() => {
           notification.style.opacity = "0";
           notification.style.transform = "translateY(20px)";
@@ -1487,41 +1409,7 @@ console.log("Productos cargados en Astro:", products?.length);
         }, 3000);
       }
 
-      // ============ WHATSAPP ============
-
-      btnWhatsApp?.addEventListener("click", () => {
-        if (cart.length === 0) return;
-        
-        // Verificar horario antes de enviar
-        if (!checkBusinessStatus()) {
-          showNotification("⚠️ Lo sentimos, estamos cerrados. Horario: 19:00 - 00:00");
-          return;
-        }
-
-        let mensaje = "¡Hola! Quiero hacer el siguiente pedido:%0A%0A";
-        cart.forEach((item) => {
-          const subtotal = item.price * item.quantity;
-          mensaje += `🍔 ${item.quantity}x ${item.name} - $${subtotal.toLocaleString(
-            "es-AR"
-          )}%0A`;
-          if (item.notes) {
-            mensaje += `⚠️ ${item.notes}%0A`;
-          }
-        });
-        mensaje += `%0A💰 *Total: $${calculateTotal().toLocaleString("es-AR")}*`;
-
-        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${mensaje}`;
-        window.open(url, "_blank");
-      });
-
-      // Inicializar el carrito al cargar
       updateCart();
-
-      console.log("🍔 Sistema de carrito inicializado", { 
-        productsData: productsData.length,
-        cartItems: cart.length,
-        businessIsOpen 
-      });
     });
   </script>
 </Layout>
