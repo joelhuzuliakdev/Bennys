@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { products } from "../data/products";
+import { products, categories } from "../data/products";
 ---
 
 <Layout title="Carta Benny´s">
@@ -18,10 +18,36 @@ import { products } from "../data/products";
                 </div>
             </div>
 
+            <!-- FILTROS -->
+            <section id="filters" class="flex flex-wrap gap-3 justify-center mb-8 text-sm px-4">
+                {categories.map((cat) => (
+                <button
+                    type="button"
+                    data-filter={cat.id}
+                    class={`filter-btn px-6 py-2.5 rounded-full border-2 text-xs uppercase tracking-wider font-bold transition-all duration-300 ${
+                    cat.id === "todos"
+                        ? "active bg-red-600 border-white text-white shadow-lg shadow-red-500/50"
+                        : "bg-black border-white text-zinc-200 hover:bg-zinc-700 hover:border-zinc-500"
+                    }`}
+                    aria-label={`Filtrar por ${cat.name}`}
+                >
+                    {cat.name}
+                </button>
+                ))}
+            </section>
+
+            <!-- CONTADOR DE PRODUCTOS -->
+            <p class="mb-4 text-center">
+                <span class="inline-block bg-zinc-950/90 text-zinc-100 text-xs px-4 py-2 rounded-full border border-zinc-800">
+                Mostrando <span id="products-count" class="font-semibold text-white">{products.length}</span> productos
+                </span>
+            </p>
+
             <!-- Grid de productos -->
             <ul class="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                 {products.map((product) => (
-                    <li class="group relative">
+                    <li class="product-card group relative"
+                        data-category={product.category}>
                         <!-- Efecto de brillo en hover -->
                         <div class="absolute -inset-0.5 bg-gradient-to-r from-red-600 to-orange-600 rounded-3xl blur opacity-0 group-hover:opacity-30 transition duration-500"></div>
                         
@@ -98,4 +124,43 @@ import { products } from "../data/products";
 
         </div>
     </section>
+
+    <script>
+        // ============ FILTROS ============
+        let activeFilter = "todos";
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        const cards = document.querySelectorAll(".product-card");
+        const productsCount = document.getElementById("products-count");
+
+        function aplicarFiltro() {
+            let visibleCount = 0;
+            cards.forEach((card) => {
+            const cardCategory = card.dataset.category;
+            const shouldShow = activeFilter === "todos" || cardCategory === activeFilter;
+            if (shouldShow) {
+                card.classList.remove("hidden");
+                card.style.animation = "fadeIn 0.4s ease-out";
+                visibleCount++;
+            } else {
+                card.classList.add("hidden");
+            }
+            });
+            if (productsCount) productsCount.textContent = visibleCount;
+        }
+
+        filterButtons.forEach((btn) => {
+            btn.addEventListener("click", () => {
+            activeFilter = btn.dataset.filter;
+            filterButtons.forEach((b) => {
+                b.classList.remove("bg-red-600", "border-red-600", "text-white", "font-semibold", "shadow", "shadow-red-500/40");
+                b.classList.add("bg-zinc-900", "border-zinc-700", "text-zinc-300");
+            });
+            btn.classList.remove("bg-zinc-900", "border-zinc-700", "text-zinc-300");
+            btn.classList.add("bg-red-600", "border-red-600", "text-white", "font-semibold", "shadow", "shadow-red-500/40");
+            aplicarFiltro();
+            });
+        });
+
+        aplicarFiltro();
+    </script>
 </Layout>
