@@ -7,7 +7,6 @@ console.log("Productos cargados en Astro:", products?.length);
 const WHATSAPP_NUMBER = "3572548014";
 const ALIAS_TRANSFERENCIA = "benny.burgers"; // ⬅️ CAMBIAR ESTO
 const HORA_ENTREGA_ESTIMADA = "35-45"; // ⬅️ CAMBIAR ESTO (en minutos)
-const COSTO_ENVIO = 3000; // ⬅️ CAMBIAR ESTO
 // ================================================
 ---
 
@@ -76,51 +75,12 @@ const COSTO_ENVIO = 3000; // ⬅️ CAMBIAR ESTO
 
             <div class="flex flex-wrap gap-3 text-xs text-zinc-300">
               <span>🕐 Lun-Dom: 19:00 - 00:00</span>
-              <span id="delivery-time">⏱️ Entrega en {HORA_ENTREGA_ESTIMADA} min</span>
+              <span id="delivery-time">⏱️ Tiempo estimado: {HORA_ENTREGA_ESTIMADA} min</span>
             </div>
           </div>
 
-          <!-- Info de zona y métodos de pago -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-
-            <!-- Zona de entrega -->
-            <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-4">
-              <h3
-                class="text-sm font-semibold text-zinc-50 mb-2 flex items-center gap-2"
-              >
-                <svg
-                  class="w-4 h-4 text-red-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                  />
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                </svg>
-                Zona de entrega
-              </h3>
-
-              <p class="text-xs text-zinc-400 mb-2">Pilar</p>
-
-              <div class="flex items-center gap-2 text-xs">
-                <span class="bg-zinc-800 px-2 py-1 rounded text-zinc-300">
-                  Envío: ${COSTO_ENVIO.toLocaleString("es-AR")}
-                </span>
-                <span class="text-red-400">· Retiro gratis</span>
-              </div>
-            </div>
-
-            <!-- Métodos de pago -->
+          <!-- Métodos de pago -->
+          <div class="mb-6">
             <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-4">
               <h3
                 class="text-sm font-semibold text-zinc-50 mb-2 flex items-center gap-2"
@@ -155,7 +115,6 @@ const COSTO_ENVIO = 3000; // ⬅️ CAMBIAR ESTO
                 <p class="text-sm font-mono text-green-400 font-semibold">{ALIAS_TRANSFERENCIA}</p>
               </div>
             </div>
-
           </div>
         </div>
       </section>
@@ -204,7 +163,7 @@ const COSTO_ENVIO = 3000; // ⬅️ CAMBIAR ESTO
                 alt={`${product.name} - ${product.description}`}
                 class="product-image h-full w-full object-cover hover:scale-105 transition-all duration-500 opacity-0"
                 loading="lazy"
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%2327272a' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%2352525b' font-family='sans-serif' font-size='14'%3ECargando...%3C/text%3E%3C/svg%3E"
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%2327272a' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%2352525b' font-family='sans-serif' font-size='14'%3ECargando...%3C/text%3E%3C%2Fsvg%3E"
               />
               {product.badge && (
                 <span
@@ -470,20 +429,6 @@ const COSTO_ENVIO = 3000; // ⬅️ CAMBIAR ESTO
                 </div>
               </div>
             </div>
-          </div>
-
-          <!-- Dirección de entrega -->
-          <div class="mb-4">
-            <label class="block text-sm font-medium text-zinc-300 mb-2">
-              📍 Dirección de entrega:
-            </label>
-            <textarea
-              id="delivery-address"
-              class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-200 focus:outline-none focus:ring-2 focus:ring-red-600"
-              rows="2"
-              placeholder="Calle, número, piso/depto, referencias..."
-              required
-            ></textarea>
           </div>
         </div>
 
@@ -815,7 +760,7 @@ const COSTO_ENVIO = 3000; // ⬅️ CAMBIAR ESTO
         const currentHour = now.getHours();
         const currentMinutes = now.getMinutes();
         const currentTime = currentHour + currentMinutes / 60;
-        const openTime = 13;
+        const openTime = 12;
         const closeTime = 24;
         const isOpen = currentTime >= openTime && currentTime < closeTime;
         
@@ -1303,16 +1248,13 @@ const COSTO_ENVIO = 3000; // ⬅️ CAMBIAR ESTO
           return;
         }
         
-        // Actualizar totales en el modal de pago
         const total = calculateTotal();
         paymentTotal.textContent = `$${total.toLocaleString("es-AR")}`;
         cashTotal.textContent = `$${total.toLocaleString("es-AR")}`;
         
-        // Resetear formulario
         document.querySelector('input[name="payment-method"][value="transferencia"]').checked = true;
         transferInfo.classList.remove('hidden');
         cashInfo.classList.add('hidden');
-        document.getElementById('delivery-address').value = '';
         
         closeModal(cartModal);
         openModal(paymentModal);
@@ -1320,12 +1262,6 @@ const COSTO_ENVIO = 3000; // ⬅️ CAMBIAR ESTO
 
       btnSendOrder?.addEventListener("click", () => {
         if (cart.length === 0) return;
-        
-        const address = document.getElementById('delivery-address').value.trim();
-        if (!address) {
-          showNotification('⚠️ Por favor ingresá tu dirección de entrega');
-          return;
-        }
         
         const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
         const paymentLabel = paymentMethod === 'transferencia' ? '🟢 Transferencia' : '💵 Efectivo';
@@ -1341,8 +1277,7 @@ const COSTO_ENVIO = 3000; // ⬅️ CAMBIAR ESTO
         });
         
         mensaje += `%0A💰 *Total: $${calculateTotal().toLocaleString("es-AR")}*`;
-        mensaje += `%0A%0A📍 *Dirección:* ${encodeURIComponent(address)}`;
-        mensaje += `%0A💳 *Forma de pago:* ${paymentLabel}`;
+        mensaje += `%0A%0A💳 *Forma de pago:* ${paymentLabel}`;
         
         if (paymentMethod === 'transferencia') {
           mensaje += `%0A%0A🟢 *Voy a transferir al alias:* ${ALIAS_TRANSFERENCIA}`;
