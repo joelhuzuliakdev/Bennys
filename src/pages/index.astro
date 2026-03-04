@@ -5,7 +5,7 @@ console.log("Productos cargados en Astro:", products?.length);
 
 // ===== CONFIGURACIÓN DEL NEGOCIO (EDITABLE) =====
 const WHATSAPP_NUMBER = "3572548014";
-const ALIAS_TRANSFERENCIA = "benny.burgers"; // ⬅️ CAMBIAR ESTO
+const ALIAS_TRANSFERENCIA = "alanserbini.mp"; // ⬅️ CAMBIAR ESTO
 const HORA_ENTREGA_ESTIMADA = "35-45"; // ⬅️ CAMBIAR ESTO (en minutos)
 // ================================================
 ---
@@ -74,7 +74,7 @@ const HORA_ENTREGA_ESTIMADA = "35-45"; // ⬅️ CAMBIAR ESTO (en minutos)
             </div>
 
             <div class="flex flex-wrap gap-3 text-xs text-zinc-300">
-              <span>🕐 Lun-Dom: 19:00 - 00:00</span>
+              <span>🕐 Mar-Dom: 20:00 - 00:00</span>
               <span id="delivery-time">⏱️ Tiempo estimado: {HORA_ENTREGA_ESTIMADA} min</span>
             </div>
           </div>
@@ -184,9 +184,9 @@ const HORA_ENTREGA_ESTIMADA = "35-45"; // ⬅️ CAMBIAR ESTO (en minutos)
                   {product.name}
                 </h3>
                 <span class="text-red-500 font-bold text-sm whitespace-nowrap product-price">
-                  {product.category === "bebidas" || product.category === "postres" 
+                  {product.category === "bebidas" || product.category === "postres" || product.category === "lomitos" || product.category === "sandwiches" || product.category === "snacks"
                     ? `$${product.price.toLocaleString("es-AR")}`
-                    : "Desde $10.900"
+                    : "Desde $12.000"
                   }
                 </span>
               </div>
@@ -502,7 +502,7 @@ const HORA_ENTREGA_ESTIMADA = "35-45"; // ⬅️ CAMBIAR ESTO (en minutos)
                       <span class="text-xs text-zinc-400 block">2 carnes</span>
                     </div>
                   </div>
-                  <span class="text-sm font-bold text-red-400">$12.900</span>
+                  <span class="text-sm font-bold text-red-400">$15.000</span>
                 </label>
 
                 <label class="size-option flex items-center justify-between bg-zinc-800 rounded-xl px-4 py-3 cursor-pointer hover:bg-zinc-700 transition border-2 border-transparent">
@@ -513,7 +513,7 @@ const HORA_ENTREGA_ESTIMADA = "35-45"; // ⬅️ CAMBIAR ESTO (en minutos)
                       <span class="text-xs text-zinc-400 block">3 carnes</span>
                     </div>
                   </div>
-                  <span class="text-sm font-bold text-red-400">$14.900</span>
+                  <span class="text-sm font-bold text-red-400">$17.900</span>
                 </label>
               </div>
             </div>
@@ -760,9 +760,11 @@ const HORA_ENTREGA_ESTIMADA = "35-45"; // ⬅️ CAMBIAR ESTO (en minutos)
         const currentHour = now.getHours();
         const currentMinutes = now.getMinutes();
         const currentTime = currentHour + currentMinutes / 60;
-        const openTime = 12;
+        const openTime = 18;
         const closeTime = 24;
-        const isOpen = currentTime >= openTime && currentTime < closeTime;
+        const currentDay = now.getDay();
+        const isMonday = currentDay === 1;
+        const isOpen = !isMonday && currentTime >= openTime && currentTime < closeTime;
         
         const statusBanner = document.getElementById('status-banner');
         const statusIndicator = document.getElementById('status-indicator');
@@ -947,8 +949,8 @@ const HORA_ENTREGA_ESTIMADA = "35-45"; // ⬅️ CAMBIAR ESTO (en minutos)
         const product = productsData.find((p) => p.id === String(productId));
         if (!product) return;
 
-        if (product.category === "bebidas" || product.category === "postres") {
-          cart.push({ ...product, price: product.price, quantity: 1, notes: "" });
+        if (product.category === "bebidas" || product.category === "postres" || product.category === "lomitos" || product.category === "sandwiches" || product.category === "snacks") {
+  cart.push({ ...product, price: product.price, quantity: 1, notes: "" });
           updateCart();
           showNotification(`✅ "${product.name}" agregado al carrito`);
           return;
