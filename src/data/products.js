@@ -216,19 +216,6 @@ export const products = [
   },
   {
     id: 15,
-    name: "Sandwich Meatball",
-    category: "sandwiches",
-    price: 0,
-    image: "/vegano/hamburguesa-vegana.jpg",
-    description: "Pan tostado, albondigas caseras en salsa roja, cubiertas con mozzarella fundida, lluvia de parmesano",
-    ingredients: [
-      "Pan Tostado",
-      "Albondigas Caseras En Salsa Roja",
-      "Lluvia De Parmesano"
-    ]
-  },
-  {
-    id: 16,
     name: "Papas Benny´s",
     category: "snacks",
     price: 13000,
@@ -242,7 +229,7 @@ export const products = [
     ]
   },
   {
-    id: 17,
+    id: 16,
     name: "Tradicionales",
     category: "snacks",
     price: 9000,
@@ -254,7 +241,7 @@ export const products = [
     ]
   },
   {
-    id: 18,
+    id: 17,
     name: "Americanas",
     category: "snacks",
     price: 11000,
@@ -267,7 +254,7 @@ export const products = [
     ]
   },
   {
-    id: 19,
+    id: 18,
     name: "Bastones de Mozzarella",
     category: "snacks",
     price: 11000,
@@ -279,7 +266,7 @@ export const products = [
     ]
   },
   {
-    id: 20,
+    id: 19,
     name: "Picadita Benny´s",
     category: "snacks",
     price: 16000,
@@ -297,24 +284,7 @@ export const products = [
     ]
   },
   {
-    id: 21,
-    name: "Picadita Benny´s 2.0",
-    category: "snacks",
-    price: 0,
-    image: "/gaseosas/coca-cola.jpg",
-    description: "Papas fritas con cheddar y bacon, bastones de mozzarella, nugets de pollo frito, salchichitas con aderezo, aceitunas, maní, pan casero",
-    ingredients: [
-      "Papitas Fritas Con Cheddar y Bacon",
-      "Bastones de Mozzarella",
-      "Nugets de Pollo Frito",
-      "Salchicas Con Aderezo",
-      "Aceitunas",
-      "Maní",
-      "Pan Casero"
-    ]
-  },
-  {
-    id: 22,
+    id: 20,
     name: "Pepsi",
     category: "bebidas",
     price: 3000,
@@ -323,7 +293,7 @@ export const products = [
     ingredients: []
   },
   {
-    id: 23,
+    id: 21,
     name: "Mirinda",
     category: "bebidas",
     price: 3000,
@@ -332,7 +302,7 @@ export const products = [
     ingredients: []
   },
   {
-    id: 24,
+    id: 22,
     name: "Seven Up",
     category: "bebidas",
     price: 3000,
@@ -341,7 +311,7 @@ export const products = [
     ingredients: []
   },
   {
-    id: 25,
+    id: 23,
     name: "Paso De Los Toros",
     category: "bebidas",
     price: 3000,
@@ -350,7 +320,7 @@ export const products = [
     ingredients: []
   },
   {
-    id: 26,
+    id: 24,
     name: "Pepsi Zero Black",
     category: "bebidas",
     price: 3000,
@@ -359,7 +329,7 @@ export const products = [
     ingredients: []
   },
   {
-    id: 27,
+    id: 25,
     name: "Seven Up Zero",
     category: "bebidas",
     price: 3000,
@@ -368,7 +338,7 @@ export const products = [
     ingredients: []
   },
   {
-    id: 28,
+    id: 26,
     name: "Agua Mineral",
     category: "bebidas",
     price: 3000,
@@ -377,7 +347,7 @@ export const products = [
     ingredients: []
   },
   {
-    id: 29,
+    id: 27,
     name: "Red Bull",
     category: "bebidas",
     price: 3000,
@@ -386,7 +356,7 @@ export const products = [
     ingredients: []
   },
   {
-    id: 30,
+    id: 28,
     name: "Stella Artois",
     category: "bebidas",
     price: 9000,
@@ -395,7 +365,7 @@ export const products = [
     ingredients: []
   },
   {
-    id: 31,
+    id: 29,
     name: "Brahma Chopp",
     category: "bebidas",
     price: 7000,
@@ -404,7 +374,7 @@ export const products = [
     ingredients: []
   },
   {
-    id: 32,
+    id: 30,
     name: "Andes Ipa",
     category: "bebidas",
     price: 7000,
@@ -413,7 +383,7 @@ export const products = [
     ingredients: []
   },
   {
-    id: 33,
+    id: 31,
     name: "Andes Rubia",
     category: "bebidas",
     price: 7000,
@@ -422,7 +392,7 @@ export const products = [
     ingredients: []
   },
   {
-    id: 34,
+    id: 32,
     name: "Andes Roja",
     category: "bebidas",
     price: 7000,
@@ -431,25 +401,34 @@ export const products = [
     ingredients: []
   },
   {
-    id: 35,
+    id: 33,
     name: "Corona",
     category: "bebidas",
     price: 5000,
     image: "/gaseosas/pepsi.jpg",
-    description: "Bebida refrescante 355cc",
+    description: "Bebida refrescante 330cc",
+    ingredients: []
+  },
+  {
+    id: 34,
+    name: "Stella",
+    category: "bebidas",
+    price: 0,
+    image: "/gaseosas/pepsi.jpg",
+    description: "Bebida refrescante 330cc",
+    ingredients: []
+  },
+  {
+    id: 35,
+    name: "Stella Sin Alcohol",
+    category: "bebidas",
+    price: 0,
+    image: "/gaseosas/pepsi.jpg",
+    description: "Bebida refrescante 330cc",
     ingredients: []
   },
   {
     id: 36,
-    name: "Budweiser",
-    category: "bebidas",
-    price: 0,
-    image: "/gaseosas/pepsi.jpg",
-    description: "Bebida refrescante 355cc",
-    ingredients: []
-  },
-  {
-    id: 37,
     name: "Chocotorta",
     category: "postres",
     price: 8000,
@@ -458,7 +437,7 @@ export const products = [
     ingredients: []
   },
   {
-    id: 38,
+    id: 37,
     name: "Postre Borracho",
     category: "postres",
     price: 8000,
@@ -467,7 +446,7 @@ export const products = [
     ingredients: []
   },
   {
-    id: 39,
+    id: 38,
     name: "Ensalada de Frutas",
     category: "postres",
     price: 8000,
